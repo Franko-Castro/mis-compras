@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMac mini - TiendaOnline</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <!-- Aquí se carga la navegación (igual que index) -->
+    <div id="contenedor-navegacion"></div>
+    <script src="carrito.js"></script>
+
+    <!-- Contenido específico del producto -->
+    <main class="contenido-principal">
+        <div class="contenedor-ancho">
+            <div class="ficha-producto">
+                <div class="imagen-producto">
+                    <img src="imagendes de productos/imagen5.jpg" alt="iMac mini">
+                </div>
+                <div class="info-producto">
+                    <h1>iMac mini</h1>
+                    <p class="precio-grande">$999.99</p>
+                    <div class="calificacion">★★★★★ (4.8/5)</div>
+                    <div class="vendedor-info">
+                        Vendido por: <a href="#" id="producto-vendedor-link"><span id="producto-vendedor-nombre"></span></a>
+                    </div>
+                    <p class="descripcion-producto">
+                        El iMac mini es potencia en estado puro. Con el chip M2 de Apple,
+                        ofrece un rendimiento increíble en un diseño ultracompacto.
+                        Perfecto para trabajar, jugar y crear.
+                    </p>
+                    <ul class="lista-caracteristicas">
+                        <li>Chip M2 de Apple</li>
+                        <li>CPU de 8 núcleos</li>
+                        <li>GPU de 10 núcleos</li>
+                        <li>Hasta 24 GB de memoria unificada</li>
+                    </ul>
+                    <div class="botones-accion">
+                        <button id="btn-agregar-carrito" class="boton boton-rojo agregar-carrito" data-id="5" data-nombre="iMac mini"
+                            data-precio="999.99" data-imagen="imagen5.jpg">
+                            Agregar al Carrito
+                        </button>
+                        <button class="boton boton-blanco">Comprar Ahora</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Aquí se carga el pie de página (igual que index) -->
+    <div id="contenedor-pie"></div>
+    <script src="verificar-sesion.js"></script>
+    <script src="cargar-componentes.js"></script>
+</body>
+
+</html>

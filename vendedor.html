@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil del Vendedor</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <div id="contenedor-navegacion"></div>
+
+  <main class="contenido-principal">
+    <div class="contenedor-ancho">
+      <div id="perfil-vendedor"></div>
+      <h2 style="margin-top:24px;">Productos del vendedor</h2>
+      <div id="productos-vendedor" class="productos-lista"></div>
+    </div>
+  </main>
+
+  <div id="contenedor-pie"></div>
+  <script src="cargar-componentes.js"></script>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    if (!id) {
+      document.getElementById('perfil-vendedor').innerHTML = '<p>ID de vendedor no proporcionado.</p>';
+    } else {
+      // Cargar datos del vendedor
+      fetch('php/obtener_vendedor.php?id=' + encodeURIComponent(id))
+        .then(r => r.json())
+        .then(data => {
+          if (!data.success) {
+            document.getElementById('perfil-vendedor').innerHTML = '<p>Vendedor no encontrado.</p>';
+            return;
+          }
+
+          const v = data.vendedor;
+          document.getElementById('perfil-vendedor').innerHTML = `
+            <div style="display:flex;gap:20px;align-items:center;margin:20px 0;">
+              <div style="width:90px;height:90px;border-radius:10px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:28px;">${v.nombre ? v.nombre.charAt(0).toUpperCase() : 'V'}</div>
+              <div>
+                <h1 style="margin:0;">${v.nombre}</h1>
+                <p style="margin:4px 0;color:#6b7280;">Miembro desde: ${v.fecha_registro || '—'}</p>
+                <p style="margin:4px 0;color:#6b7280;">Rating: ${parseFloat(v.rating).toFixed(1)} (${v.valoraciones} valoraciones)</p>
+              </div>
+            </div>
+          `;
+
+          // Cargar productos del vendedor
+          return fetch('php/mis_productos.php?id=' + encodeURIComponent(id));
+        })
+        .then(r => r ? r.json() : null)
+        .then(data => {
+          const cont = document.getElementById('productos-vendedor');
+          if (!data || !data.exito || data.productos.length === 0) {
+            cont.innerHTML = '<p>No tiene productos publicados.</p>';
+            return;
+          }
+
+          let html = '';
+          data.productos.forEach(p => {
+            html += `
+              <div class="producto-minimal">
+                <img src="${p.imagen}" onerror="this.src='imagenes/default-product.svg'" style="height:160px;object-fit:cover;width:100%">
+                <div style="padding:12px">
+                  <h3 style="margin:0">${p.nombre}</h3>
+                  <div style="color:#3b82f6;font-weight:700;margin:6px 0">$${p.precio}</div>
+                  <p style="color:#6b7280">${p.descripcion.substring(0,120)}${p.descripcion.length>120? '...':''}</p>
+                  <a href="producto.html?id=${p.id_producto}" style="display:inline-block;margin-top:8px;color:#2563eb">Ver Producto</a>
+                </div>
+              </div>
+            `;
+          });
+
+          cont.innerHTML = html;
+        })
+        .catch(err => {
+          document.getElementById('perfil-vendedor').innerHTML = '<p>Error al cargar el perfil.</p>';
+        });
+    }
+  </script>
+</body>
+</html>

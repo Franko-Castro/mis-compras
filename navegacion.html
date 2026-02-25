@@ -1,0 +1,60 @@
+<nav class="barra-navegacion">
+    <div class="contenedor-nav">
+
+        <!-- LOGO -->
+        <div class="logo-tienda">
+            <a href="index.html"><img src="imagenes/logo.png" alt="Logo"></a>
+        </div>
+
+        <!-- BUSCADOR -->
+        <div class="buscador-container">
+            <input type="text" id="buscador" placeholder="🔍 Buscar productos...">
+        </div>
+
+        <!-- RESULTADOS -->
+        <div id="resultados-busqueda" class="resultados-lista"></div>
+
+        <!-- MENÚ -->
+        <ul class="menu-principal" id="menu-principal">
+            <li><a href="index.html" class="enlace-nav">Inicio</a></li>
+           <li class="menu-desplegable">
+    <a href="productos.html" class="enlace-nav">Productos</a>
+    <ul class="submenu" id="submenu-categorias">
+        <li>Cargando...</li>
+    </ul>
+</li>
+
+            
+            <li><a href="carrito de compras.html" class="enlace-nav">Carrito</a></li>
+
+            <li id="menu-perfil" style="display:none;">
+                <a href="perfil.html" class="enlace-nav">Mi Perfil</a>
+            </li>
+            <li id="menu-login">
+                <a onclick="abrirModalLogin()" class="enlace-nav">Iniciar Sesión</a>
+            </li>
+            <li id="menu-cerrar" style="display:none;">
+                <a onclick="cerrarSesion()" class="enlace-nav">Cerrar Sesión</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<script>
+async function cargarCategoriasMenu() {
+    const resp = await fetch("php/obtener_categorias.php");
+    const data = await resp.json();
+
+    const lista = document.getElementById("submenu-categorias");
+    lista.innerHTML = "";
+
+    data.categorias.forEach(cat => {
+        lista.innerHTML += `
+            <li><a href="buscar.html?categoria=${cat.id_categoria}">
+                ${cat.nombre}
+            </a></li>`;
+    });
+}
+
+cargarCategoriasMenu();
+</script>

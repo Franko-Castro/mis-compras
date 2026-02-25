@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar producto | MisCompras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="editar_producto.css">
+</head>
+
+<body>
+
+<div class="edit-container reveal">
+
+  <!-- HEADER -->
+  <header class="edit-header">
+    <h1>Editar producto</h1>
+    <p>Actualiza la información de tu producto</p>
+  </header>
+
+  <!-- FORMULARIO -->
+  <form id="form-editar" enctype="multipart/form-data">
+
+    <input type="hidden" name="id_producto" id="id_producto">
+
+    <div class="edit-body">
+
+      <!-- TEXTO -->
+      <div class="edit-text">
+
+        <div class="form-group">
+          <label>Nombre del producto</label>
+          <input type="text" name="nombre" id="nombre" required>
+        </div>
+
+        <div class="form-group">
+          <label>Precio</label>
+          <input type="number" name="precio" id="precio" step="0.01" required>
+        </div>
+
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea name="descripcion" id="descripcion" required></textarea>
+        </div>
+
+      </div>
+
+      <!-- IMAGEN -->
+      <div class="edit-image">
+        <img id="preview" src="imagenes/default-product.svg">
+        <label class="file-btn">
+          Cambiar imagen
+          <input type="file" name="imagen" id="imagen" accept="image/*">
+        </label>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="edit-footer">
+      <a href="perfil.html" class="btn secondary">Cancelar</a>
+      <button type="submit" class="btn primary">Guardar cambios</button>
+    </footer>
+
+  </form>
+</div>
+
+<script src="editar_producto.js"></script>
+</body>
+</html>
+<style>
+    :root {
+  --accent: #2dd4ff;
+  --dark: #020617;
+  --panel: #0f172a;
+  --border: #1e293b;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: linear-gradient(180deg, #020617, #0f172a);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 80px 20px;
+  color: var(--text);
+}
+
+/* CONTENEDOR */
+.edit-container {
+  width: 100%;
+  max-width: 900px;
+  background: var(--panel);
+  border-radius: 18px;
+  box-shadow: 0 40px 80px rgba(0,0,0,.6);
+  overflow: hidden;
+  animation: fadeUp .6s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* HEADER */
+.edit-header {
+  padding: 30px 40px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(90deg, rgba(45,212,255,.2), transparent);
+}
+
+.edit-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.edit-header p {
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* BODY */
+.edit-body {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  padding: 40px;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: #020617;
+  border: 1px solid var(--border);
+  padding: 14px;
+  border-radius: 10px;
+  color: var(--text);
+  transition: all .3s ease;
+}
+
+.form-group textarea {
+  resize: none;
+  min-height: 140px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(45,212,255,.2);
+}
+
+/* IMAGEN */
+.edit-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.edit-image img {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  transition: transform .4s ease;
+}
+
+.edit-image img:hover {
+  transform: scale(1.05);
+}
+
+.file-btn {
+  background: var(--accent);
+  color: #020617;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.file-btn input {
+  display: none;
+}
+
+/* FOOTER */
+.edit-footer {
+  padding: 25px 40px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+/* BOTONES */
+.btn {
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: #020617;
+}
+
+.btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(45,212,255,.4);
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.btn.secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .edit-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>

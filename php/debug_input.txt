@@ -1,0 +1,1 @@
+{"usuario_id":null,"items":[{"id":"5","nombre":"iMac mini","precio":999.99,"imagen":"imagen5.jpg","cantidad":1,"subtotal":999.99},{"id":"3","nombre":"iMac","precio":2500,"imagen":"imagen3.jpg","cantidad":1,"subtotal":2500},{"id":"1","nombre":"iPhone 15 Pro","precio":999.99,"imagen":"ipone15.jpg","cantidad":1,"subtotal":999.99}],"total":"4499.98","direccion":null}

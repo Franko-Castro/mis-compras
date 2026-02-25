@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MacBook Pro M3 - TiendaOnline</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <!-- Aquí se carga la navegación (igual que index) -->
+    <div id="contenedor-navegacion"></div>
+
+    <!-- Contenido específico del producto -->
+    <main class="contenido-principal">
+        <script src="carrito.js"></script>
+        <div class="contenedor-ancho">
+            <div class="ficha-producto">
+                <div class="imagen-producto">
+                    <img src="imagendes de productos/images.jpg" alt="MacBook Pro M3">
+                </div>
+                <div class="info-producto">
+                    <h1>MacBook Pro M3</h1>
+                    <p class="precio-grande">$1,599.99</p>
+                    <div class="calificacion">★★★★★ (4.9/5)</div>
+                    <p class="descripcion-producto">
+                        La MacBook Pro con chip M3 lleva el rendimiento profesional a un nuevo nivel.
+                        Perfecta para creativos y profesionales que exigen lo mejor.
+                    </p>
+                    <ul class="lista-caracteristicas">
+                        <li>Chip Apple M3 de 8 núcleos</li>
+                        <li>Pantalla Liquid Retina XDR 14"</li>
+                        <li>16GB memoria unificada</li>
+                        <li>SSD de 512GB</li>
+                        <li>Hasta 22 horas de batería</li>
+                    </ul>
+                    <!-- boton de compra funcional -->
+                    <div class="botones-accion">
+                        <button class="boton boton-rojo agregar-carrito" data-id="2" data-nombre="MacBook Pro M3"
+                            data-precio="1599.99" data-imagen="images.jpg">
+                            Agregar al Carrito
+                        </button>
+                        <button class="boton boton-blanco">Comprar Ahora</button>
+                    </div>
+    </main>
+
+    <!-- Aquí se carga el pie de página (igual que index) -->
+    <div id="contenedor-pie"></div>
+    <script src="verificar-sesion.js"></script>
+    <script src="cargar-componentes.js"></script>
+</body>
+
+</html>

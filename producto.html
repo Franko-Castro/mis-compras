@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Producto | MisCompras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+<!-- NAV -->
+<div id="contenedor-navegacion"></div>
+
+<main class="contenido-principal">
+  <div class="contenedor-ancho">
+    <div id="detalle-producto"></div>
+    <div id="calificacion-promedio"></div>
+
+    <section class="seccion-resenas">
+
+  <!-- PROMEDIO -->
+  <div id="calificacion-promedio" class="resumen-calificacion">
+    ⭐ 0 / 5 (0 reseñas)
+  </div>
+
+  <h3>Reseñas</h3>
+  <div id="lista-resenas">Cargando reseñas...</div>
+
+  <!-- FORMULARIO -->
+  <form id="form-resena" class="form-resena">
+
+    <h4>Deja tu reseña</h4>
+
+    <select name="calificacion" required>
+      <option value="">Calificación</option>
+      <option value="5">⭐⭐⭐⭐⭐</option>
+      <option value="4">⭐⭐⭐⭐</option>
+      <option value="3">⭐⭐⭐</option>
+      <option value="2">⭐⭐</option>
+      <option value="1">⭐</option>
+    </select>
+
+    <textarea
+      name="comentario"
+      placeholder="Escribe tu reseña"
+      required
+    ></textarea>
+
+    <button type="submit" class="btn-enviar-resena">
+      Enviar reseña
+    </button>
+
+  </form>
+
+</section>
+  
+
+<style>
+ /* ===============================
+   SECCIÓN RESEÑAS (HORIZONTAL)
+================================ */
+
+.seccion-resenas {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+/* Título */
+.seccion-resenas h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 20px;
+}
+
+/* ===============================
+   LISTA DE RESEÑAS HORIZONTAL
+================================ */
+
+#lista-resenas {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+#lista-resenas::-webkit-scrollbar {
+    height: 6px;
+}
+
+#lista-resenas::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+/* ===============================
+   CARD RESEÑA
+================================ */
+
+.resena {
+    min-width: 280px;
+    max-width: 320px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Usuario + estrellas */
+.resena strong {
+    font-size: 0.95rem;
+    color: #1e293b;
+}
+
+.resena span {
+    font-size: 0.9rem;
+    color: #f59e0b;
+    margin-left: 6px;
+}
+
+/* Texto */
+.resena p {
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+/* Fecha */
+.resena small {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+/* ===============================
+   FORMULARIO RESEÑA
+================================ */
+
+#form-resena {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Select */
+#form-resena select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    font-size: 0.9rem;
+}
+
+/* Textarea */
+#form-resena textarea {
+    flex: 1;
+    min-height: 44px;
+    resize: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    font-size: 0.9rem;
+}
+
+/* Botón */
+#form-resena button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+#form-resena button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+/* ===============================
+   PROMEDIO CALIFICACIÓN
+================================ */
+
+#calificacion-promedio {
+    margin: 20px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+    #lista-resenas {
+        gap: 12px;
+    }
+
+    .resena {
+        min-width: 240px;
+    }
+
+    #form-resena {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+
+  </style>
+
+
+<!-- FOOTER -->
+<div id="contenedor-pie"></div>
+
+
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const idProducto = id; // nombre consistente en todo el script
+
+function mostrarMensaje(text) {
+  alert(text);
+}
+
+async function cargarPromedio() {
+  try {
+    const resp = await fetch(`php/promedio_calificacion.php?id=${idProducto}`);
+    const d = await resp.json();
+    document.getElementById("calificacion-promedio").innerHTML = `⭐ ${d.promedio} / 5 (${d.total} reseñas)`;
+  } catch (e) {
+    console.error('Error cargando promedio:', e);
+  }
+}
+
+async function cargarResenas() {
+  try {
+    const resp = await fetch(`php/obtener_resenas.php?id=${idProducto}`);
+    const data = await resp.json();
+    const cont = document.getElementById("lista-resenas");
+    if (!data.exito) {
+      cont.innerHTML = '<p>No hay reseñas.</p>';
+      return;
+    }
+
+    cont.innerHTML = "";
+
+    data.resenas.forEach(r => {
+      cont.innerHTML += `
+        <div class="resena">
+          <strong>${r.nombre}</strong>
+          <span>⭐ ${r.calificacion}</span>
+          <p>${r.comentario}</p>
+          <small>${r.fecha}</small>
+        </div>
+      `;
+    });
+  } catch (e) {
+    console.error('Error cargando reseñas:', e);
+    document.getElementById("lista-resenas").innerHTML = '<p>Error cargando reseñas</p>';
+  }
+}
+
+// Cargar producto
+fetch(`php/producto.php?id=${idProducto}`)
+  .then(r => r.json())
+  .then(async data => {
+    if (!data.exito) {
+      document.getElementById("detalle-producto").innerHTML = "<h2>Producto no encontrado</h2>";
+      return;
+    }
+
+    const p = data.producto;
+
+    document.getElementById("detalle-producto").innerHTML = `
+      <div class="ficha-producto">
+        <div class="imagen-producto">
+          <img src="${p.imagen_url}" onerror="this.src='imagenes/default-product.svg'">
+        </div>
+
+        <div class="info-producto">
+          <h1>${p.nombre}</h1>
+          <p class="precio-grande">$${p.precio}</p>
+
+          <div class="vendedor-info">
+            Vendido por <a href="vendedor.html?id=${p.id_vendedor}"><strong>${p.vendedor}</strong></a>
+          </div>
+
+          <p class="descripcion-producto">
+            ${p.descripcion}
+          </p>
+
+          <div class="botones-accion">
+            <button class="boton boton-rojo">Agregar al carrito</button>
+            <button class="boton boton-blanco">Comprar ahora</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Cargar reseñas y promedio después de renderizar
+    cargarPromedio();
+    cargarResenas();
+  })
+  .catch(err => {
+    console.error('Error cargando producto:', err);
+    document.getElementById("detalle-producto").innerHTML = "<h2>Error cargando producto</h2>";
+  });
+
+// Envío de reseña
+const formResena = document.getElementById('form-resena');
+formResena.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(formResena);
+  const calificacion = formData.get('calificacion');
+  const comentario = formData.get('comentario') || '';
+  const id_usuario = localStorage.getItem('id_usuario');
+
+  if (!id_usuario) {
+    alert('Debes iniciar sesión para dejar una reseña.');
+    return;
+  }
+
+  if (!calificacion) {
+    alert('Selecciona una calificación.');
+    return;
+  }
+
+  try {
+    const resp = await fetch('php/guardar_resena.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id_producto: idProducto, id_usuario, calificacion, comentario })
+    });
+
+    const data = await resp.json();
+
+    if (data && data.exito) {
+      alert(data.mensaje || 'Reseña enviada');
+      formResena.reset();
+      cargarPromedio();
+      cargarResenas();
+    } else {
+      alert(data && data.mensaje ? data.mensaje : 'Error al enviar reseña');
+    }
+  } catch (err) {
+    console.error('Error enviando reseña:', err);
+    alert('Error de conexión al enviar reseña');
+  }
+});
+
+</script>
+<script src="cargar-componentes.js"></script>
+</body>
+</html>

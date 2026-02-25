@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TiendaOnline - Inicio</title>
+  <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="estilos_de_registro.css">
+</head>
+
+<!-- Aquí se carga la navegación -->
+<div id="contenedor-navegacion"></div>
+
+
+<section class="carrusel">
+  <div class="carrusel-contenedor">
+
+    <div class="slide">
+      <img src="imagenes/titi2.jpg" alt="Promo 3">
+      <div class="texto-slide">
+        <h2>Proyecto de preservación</h2>
+        <p>Porcada compra que hagas es un apoyo para su preservación</p>
+      </div>
+    </div>
+
+<div class="slide">
+      <img src="imagenes/stifer.jpg" alt="Promo 3">
+      <div class="texto-slide">
+        <h2>No cesitas un local para vender</h2>
+        <p>incia a vender desde casa</p>
+      </div>
+    </div>
+
+
+
+    <div class="slide">
+      <img src="imagenes/animal.jpg" alt="Promo 3">
+      <div class="texto-slide">
+        <h2>AYUDANOS A CUIDARLOS</h2>
+        <p>Porcada compra que hagas es un apoyo para su preservación</p>
+      </div>
+    </div>
+
+    <div class="slide activo">
+      <img src="imagenes/vendedor2.jpg" alt="Promo 1">
+      <div class="texto-slide">
+        <h2>LIQUIDACIÓN HOT SALE</h2>
+        <p>Hasta 35% OFF en Tecnología</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="imagendes de productos/macbook-pro.png" alt="Promo 2">
+      <div class="texto-slide">
+        <h2>ENVÍOS GRATIS</h2>
+        <p>En compras superiores a $100.000</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="imagendes de productos/computadora.jpg" alt="Promo 3">
+      <div class="texto-slide">
+        <h2>NUEVA TEMPORADA</h2>
+        <p>Moda y accesorios</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Flechas de navegación -->
+  <button class="btn-carrusel anterior">❮</button>
+  <button class="btn-carrusel siguiente">❯</button>
+
+  <!-- Indicadores -->
+  <div class="indicadores"></div>
+</section>
+<script src="carrucel.js"></script>
+
+
+<body>
+  <!-- Contenido principal de la página -->
+  <main class="contenido-principal">
+    <div class="contenedor-ancho">
+      <section class="seccion-bienvenida">
+        <h1>Bienvenido a Mis compras</h1>
+        <p>Los mejores productos de la región</p>
+        <div class="botones-principales">
+          <a href="Ver Smartphones.html" class="boton boton-azul">Ver Smartphones</a>
+          <a href="Ver Laptops.html" class="boton boton-rojo">Ver Laptops</a>
+          <a href="frutas y verduras" class="boton boton-verde">Frutas y Verduras</a>
+          <a href="hogar_y_decoracion.html" class="boton boton-naranja">Hogar y decoracion</a>
+          <a href="carnes_y_mariscos.html" class="boton boton-rosado">Carnes y Mariscos</a>
+          <a href="ropa_y_accesorios.html" class="boton boton-cafe">Ropa y moda</a>
+          <a href="belleza_y_cuidado_personal.html" class="boton boton-canela">Belleza y Cuidado Personal</a>
+        </div>
+      </section>
+
+      <script src="modal-registro.js"></script>
+
+
+      <section class="seccion-productos">
+        <h2>Productos Destacados</h2>
+        <div class="grilla-productos">
+          <div class="tarjeta-producto">
+            <img src="imagendes de productos/ipone15.jpg" alt="iPhone">
+            <h3>iPhone 15 Pro</h3>
+            <p class="precio-destacado">$999</p>
+            <a href="producto1.html" class="boton-pequeno">Ver más</a>
+          </div>
+          <div class="tarjeta-producto">
+            <img src="imagendes de productos/images.jpg" alt="MacBook">
+            <h3>MacBook Pro M3</h3>
+            <p class="precio-destacado">$1599</p>
+            <a href="producto2.html" class="boton-pequeno">Ver más</a>
+          </div>
+          <div class="tarjeta-producto">
+            <img src="imagendes de productos/imagen3.jpg" alt="iMac">
+            <h3>iMac</h3>
+            <p class="precio-destacado">$2500</p>
+            <a href="producto3.html" class="boton-pequeno">Ver más</a>
+          </div>
+          <div class="tarjeta-producto">
+            <img src="imagendes de productos/image4.jpg" alt="iPad">
+            <h3>iPad</h3>
+            <p class="precio-destacado">$1000</p>
+            <a href="producto4.html" class="boton-pequeno">Ver más</a>
+          </div>
+          <div class="tarjeta-producto">
+            <img src="imagendes de productos/imagen5.jpg" alt="iMac mini">
+            <h3>iMac mini</h3>
+            <p class="precio-destacado">$1500</p>
+            <a href="producto.5.html" class="boton-pequeno">Ver más</a>
+          </div>
+      </section>
+
+      <!-- Sección: destacados por categoría -->
+      <section class="seccion-destacados">
+        <h2>Lo más destacado por categoría</h2>
+        <div id="destacados-por-categoria">Cargando...</div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Aquí se carga el pie de página -->
+  <div id="contenedor-pie"></div>
+  <script src="verificar-sesion.js"></script>
+  <script src="cargar-componentes.js"></script>
+  <script src="modal-registro.js"></script>
+
+  <!-- 🔐 Modal de Acceso / Registro -->
+<div id="modal-acceso" class="modal">
+  <div class="modal-content">
+    <span class="cerrar-modal" id="cerrar-modal">&times;</span>
+
+    <div class="tabs">
+      <button id="tab-login" class="active">Iniciar Sesión</button>
+      <button id="tab-registro">Crear Cuenta</button>
+    </div>
+
+    <!-- Formulario de inicio de sesión -->
+    <form id="form-login" class="formulario active">
+      <h2>Acceder</h2>
+      <p>¡Bienvenido de nuevo! Por favor, introduce tus datos.</p>
+
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <input type="password" name="contrasena" placeholder="Contraseña" required>
+
+      <button type="submit">Acceder</button>
+    </form>
+
+    <!-- Formulario de Registro -->
+    <form id="form-registro" class="formulario" action="php/registro.php" method="POST">
+      <h2>Crear Cuenta</h2>
+      <p>Crea una cuenta para empezar a comprar.</p>
+
+      <input type="text" name="nombre" placeholder="Nombre completo" required>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <input type="password" name="contrasena" placeholder="Contraseña" required>
+
+      <button type="submit">Registrarse</button>
+    </form>
+
+  </div>
+</div>
+
+<script src="login.js"></script>
+
+  <script>
+    document.querySelector('#form-registro').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+
+      const resp = await fetch(e.target.action, {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await resp.json();
+
+      // Mostrar modal elegante
+      const modal = document.createElement('div');
+      modal.style = `
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:9999;
+  `;
+      modal.innerHTML = `
+    <div style="background:#fff;padding:40px;border-radius:12px;text-align:center;">
+      <h2>${data.message}</h2>
+      <button onclick="location.reload()">Cerrar</button>
+    </div>`;
+      document.body.appendChild(modal);
+    });
+  </script>
+
+  <!-- ✅ Estilos del modal -->
+  <style>
+    .modal {
+      display: none;
+      /* mostrar directamente, luego JS la puede ocultar */
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      width: 350px;
+      max-width: 90%;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: slideUp 0.4s ease;
+    }
+
+    .cerrar-modal {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      font-size: 26px;
+      color: #888;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .cerrar-modal:hover {
+      color: #000;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 15px;
+    }
+
+    .tabs button {
+      background: none;
+      border: none;
+      font-weight: bold;
+      padding: 10px 15px;
+      cursor: pointer;
+      color: #666;
+      border-bottom: 3px solid transparent;
+      transition: 0.3s;
+    }
+
+    .tabs button.active {
+      color: #007bff;
+      border-color: #007bff;
+    }
+
+    .formulario {
+      display: none;
+      text-align: center;
+    }
+
+    .formulario.active {
+      display: block;
+    }
+
+    .formulario h2 {
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .formulario input {
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .formulario button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .formulario button:hover {
+      background: #0056d6;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+
+  <!-- ✅ Script del modal -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('modal-acceso');
+      const cerrar = document.getElementById('cerrar-modal');
+      const tabLogin = document.getElementById('tab-login');
+      const tabRegistro = document.getElementById('tab-registro');
+      const formLogin = document.getElementById('form-login');
+      const formRegistro = document.getElementById('form-registro');
+
+      // Mostrar el modal automáticamente
+      if (localStorage.getItem("id_usuario") === null) {
+        modal.style.display = 'flex';
+      }
+
+      // Alternar pestañas
+      tabLogin.addEventListener('click', () => {
+        tabLogin.classList.add('active');
+        tabRegistro.classList.remove('active');
+        formLogin.classList.add('active');
+        formRegistro.classList.remove('active');
+      });
+      tabRegistro.addEventListener('click', () => {
+        tabRegistro.classList.add('active');
+        tabLogin.classList.remove('active');
+        formRegistro.classList.add('active');
+        formLogin.classList.remove('active');
+      });
+
+      // Cerrar modal
+      cerrar.addEventListener('click', () => modal.style.display = 'none');
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+      });
+    });
+  </script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const id_usuario = localStorage.getItem("id_usuario");
+
+    const perfil = document.getElementById("menu-perfil");
+    const login = document.getElementById("menu-login");
+
+    if (id_usuario) {
+        // Usuario logueado
+        perfil.style.display = "block";   // mostrar "Mi Perfil"
+        login.style.display = "none";     // ocultar "Iniciar Sesión"
+    } else {
+        // Usuario NO logueado
+        perfil.style.display = "none";
+        login.style.display = "block";
+    }
+});
+</script>
+
+<script>
+function abrirModalLogin() {
+    const modal = document.getElementById('modal-acceso');
+    modal.style.display = 'flex';
+}
+
+function cerrarSesion() {
+    localStorage.removeItem("id_usuario");
+    location.reload(); // Refresca la página
+}
+</script>
+
+
+
+
+
+  <script src="destacados.js"></script>
+</body>
+
+</html>

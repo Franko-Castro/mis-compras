@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMac - TiendaOnline</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <!-- Aquí se carga la navegación (igual que index) -->
+    <div id="contenedor-navegacion"></div>
+    <script src="carrito.js"></script>
+    <!-- Contenido específico del producto -->
+    <main class="contenido-principal">
+        <div class="contenedor-ancho">
+            <div class="ficha-producto">
+                <div class="imagen-producto">
+                    <img src="imagendes de productos/imagen3.jpg" alt="iMac">
+                </div>
+                <div class="info-producto">
+                    <h1>iMac</h1>
+                    <p class="precio-grande">$2500</p>
+                    <div class="calificacion">★★★★★ (4.8/5)</div>
+                    <p class="descripcion-producto">
+                        CPU de 8 núcleos con 4 núcleos de rendimiento y 4 de eficiencia
+                        GPU de 8 núcleos
+                        Trazado de rayos acelerado por hardware
+                        Neural Engine de 16 núcleos
+                        120 GB/s de ancho de banda de memoria
+                    </p>
+                    <ul class="lista-caracteristicas">
+                        <li>Chip A17 Pro</li>
+                        <li>Pantalla Super Retina XDR 6.1"</li>
+                        <li>Cámara 48MP</li>
+                        <li>Construcción en titanio</li>
+                    </ul>
+                    <!-- boton de compra funcional -->
+                    <div class="botones-accion">
+                        <button class="boton boton-rojo agregar-carrito" data-id="3" data-nombre="iMac"
+                            data-precio="2500" data-imagen="imagen3.jpg">
+                            Agregar al Carrito
+                        </button>
+                        <button class="boton boton-blanco">Comprar Ahora</button>
+                    </div>
+    </main>
+
+    <!-- Aquí se carga el pie de página (igual que index) -->
+    <div id="contenedor-pie"></div>
+    <script src="verificar-sesion.js"></script>
+    <script src="cargar-componentes.js"></script>
+</body>
+
+</html>

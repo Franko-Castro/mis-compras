@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Producto</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="estilos_de_registro.css">
+
+    <style>
+        .boton-publicar {
+            display:block;
+            margin:20px 0;
+            padding:10px 15px;
+            background:#007bff;
+            color:#fff;
+            border-radius:8px;
+            border:none;
+            cursor:pointer;
+        }
+        .boton-publicar:hover { background:#0056d6; }
+
+        .producto-item {
+            padding:15px;
+            margin-bottom:15px;
+            border-bottom:1px solid #ddd;
+        }
+        .producto-item img {
+            width:120px;
+            border-radius:8px;
+        }
+
+        html,body{height:100%;}
+        body{
+            font-family:Segoe UI, Roboto, Arial, sans-serif;
+            background:linear-gradient(180deg,#f6f8fb 0%,#ffffff 100%);
+            margin:0;
+            padding:24px;
+        }
+        .page-container{
+            max-width:860px;margin:24px auto;background:#ffffff;
+            padding:28px;border-radius:12px;box-shadow:0 12px 40px rgba(15,23,42,0.06);
+        }
+        .page-container h1{
+            font-size:1.6rem;color:#0f172a;margin:0 0 18px;text-align:left
+        }
+        #form-producto{
+            display:flex;flex-direction:column;gap:12px
+        }
+        #form-producto input,
+        #form-producto textarea{
+            width:100%;padding:12px 14px;border:1px solid #e6e9ef;
+            border-radius:10px;background:#fbfdff;font-size:1rem;color:#0b1220
+        }
+        #form-producto textarea{min-height:140px;resize:vertical}
+    </style>
+</head>
+
+<body>
+<div class="page-container">
+
+<h1>Publicar un Producto</h1>
+
+<form id="form-producto" action="php/vender.php" method="POST" enctype="multipart/form-data">
+
+    <input type="text" name="nombre" placeholder="Nombre del producto" required>
+    <textarea name="descripcion" placeholder="Descripción" required></textarea>
+    <input type="number" name="precio" placeholder="Precio" required>
+    <input type="file" name="imagen" accept="image/*" required>
+
+    <input type="hidden" name="id_usuario" id="id_usuario">
+
+    <button type="submit" class="boton-publicar">Publicar</button>
+    <select name="categoria" id="select-categoria" required>
+    <option value="">Seleccionar categoría</option>
+</select>
+
+</form>
+
+</div>
+
+<!-- 🔥 AQUÍ VA EL CONTENEDOR DE REACT (MUY IMPORTANTE) -->
+<div id="react-success"></div>
+
+<!-- 🔥 Cargar React -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- 🔥 Script de React + envío del formulario -->
+<script type="text/babel">
+
+// 🎬 Componente de animación
+function SuccessAnimation({ onFinish }) {
+
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+            onFinish();
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    return (
+        <div style={{
+            position: "fixed",
+            top: 0, left: 0,
+            width: "100%", height: "100%",
+            background: "rgba(0,0,0,0.6)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999
+        }}>
+            <div style={{
+                background: "#fff",
+                padding: "40px 60px",
+                borderRadius: "20px",
+                textAlign: "center",
+                boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+                animation: "scaleUp .4s ease"
+            }}>
+                <div style={{
+                    fontSize: "70px",
+                    color: "#22c55e",
+                    animation: "pop .4s forwards"
+                }}>✔</div>
+                <h2 style={{ marginTop: "10px", color: "#111" }}>
+                    ¡Producto publicado!
+                </h2>
+                <p style={{ color: "#555" }}>Redirigiendo...</p>
+            </div>
+
+            <style>{`
+                @keyframes pop {
+                    0% { transform: scale(0); }
+                    100% { transform: scale(1); }
+                }
+                @keyframes scaleUp {
+                    from { transform: scale(0.7); opacity: 0; }
+                    to { transform: scale(1); opacity: 1; }
+                }
+            `}</style>
+        </div>
+    );
+}
+
+
+// 🧠 Script para manejar el formulario
+document.getElementById("form-producto").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const id = localStorage.getItem("id_usuario");
+    if (!id) {
+        alert("⚠️ Debes iniciar sesión para publicar productos.");
+        return;
+    }
+
+    const form = new FormData(e.target);
+    // Enviar como id_vendedor para que coincida con `php/vender.php`
+    form.append("id_vendedor", id);
+
+    const resp = await fetch("php/vender.php", {
+        method: "POST",
+        body: form
+    });
+
+    const data = await resp.json();
+
+    // Manejar ambas convenciones de respuesta
+    if (data.exito || data.success) {
+        ReactDOM.createRoot(document.getElementById("react-success"))
+            .render(
+                <SuccessAnimation onFinish={() => {
+                    window.location.href = "perfil.html";
+                }} />
+            );
+    } else {
+        alert(data.mensaje || data.message || "Error al publicar producto");
+    }
+});
+</script>
+<script>
+async function cargarCategoriasSelect() {
+    const resp = await fetch("php/obtener_categorias.php");
+    const data = await resp.json();
+    const select = document.getElementById("select-categoria");
+
+    data.categorias.forEach(cat => {
+        select.innerHTML += `
+            <option value="${cat.id_categoria}">${cat.nombre}</option>
+        `;
+    });
+}
+cargarCategoriasSelect();
+</script>
+
+
+</body>
+</html>
