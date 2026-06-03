@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vender Producto | Mis compras</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <header>
+    <h1> Mis compras - Publicar Producto</h1>
+  </header>
+
+  <main class="vender-container">
+    <h2>📦 Publica un nuevo producto</h2>
+
+    <form id="form-vender" enctype="multipart/form-data">
+      <label>Nombre del producto:</label>
+      <input type="text" name="nombre" required>
+
+      <label>Descripción:</label>
+      <textarea name="descripcion" required></textarea>
+
+      <label>Precio (USD):</label>
+      <input type="number" name="precio" step="0.01" required>
+
+      <label>Imagen del producto:</label>
+      <input type="file" name="imagen" accept="image/*" required>
+
+      <button type="submit" class="btn-publicar">Publicar producto</button>
+    </form>
+
+    <div id="mensaje"></div>
+  </main>
+
+  <script src="vender.js"></script>
+
+</body>
+</html>

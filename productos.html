@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todos los Productos</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+  <div id="contenedor-navegacion"></div>
+
+  <main class="contenido-principal">
+    <div class="contenedor-ancho">
+      <h1>Productos por Categoría</h1>
+
+      <div class="filtro-mis-productos" style="margin-bottom:18px; display:flex; align-items:center; gap:12px;">
+        <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+          <input type="checkbox" id="filtro-mis" />
+          <span>Mostrar sólo mis productos</span>
+        </label>
+        <small id="filtro-mensaje" style="color:#666;">&nbsp;</small>
+      </div>
+
+      <div id="productos-por-categoria">Cargando productos...</div>
+    </div>
+  </main>
+
+  <div id="contenedor-pie"></div>
+
+  <script src="cargar-componentes.js"></script>
+  <script src="productos.js"></script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Producto</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="cargar-componentes.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        html, body { height: 100%; }
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            margin: 0; padding: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('imagenes/frutas_para_fondo.jpg');
+            background-size: cover; background-attachment: fixed;
+            color: #1e293b;
+        }
+
+        .page-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 { font-size: 2rem; margin-bottom: 30px; text-align: center; font-weight: 800; color: #0f172a; }
+
+        #form-producto { display: flex; flex-direction: column; gap: 20px; }
+
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-weight: 700; font-size: 0.95rem; color: #475569; }
+
+        input[type="text"], input[type="number"], textarea, select {
+            width: 100%; padding: 14px 18px; border: 1.5px solid #e2e8f0;
+            border-radius: 12px; background: #f8fafc; font-size: 1rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none; border-color: #3b82f6; background: #fff;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        /* GALLERIA DE CARGA */
+        .photo-manager {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 140px);
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .photo-slot {
+            position: relative;
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .photo-slot:hover { border-color: #3b82f6; background: #eff6ff; }
+
+        .photo-slot.main {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .photo-slot input[type="file"] {
+            position: absolute;
+            width: 100%; height: 100%;
+            opacity: 0; cursor: pointer; z-index: 2;
+        }
+
+        .photo-slot img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            position: absolute; top: 0; left: 0;
+            z-index: 1;
+        }
+
+        .slot-content {
+            display: flex; flex-direction: column;
+            align-items: center; gap: 8px;
+            color: #94a3b8; font-size: 0.85rem;
+            text-align: center; padding: 10px;
+        }
+        .slot-content i { font-size: 1.5rem; }
+
+        .photo-slot.has-image .slot-content { display: none; }
+
+        .tag-main {
+            position: absolute; top: 10px; left: 10px;
+            background: #3b82f6; color: white;
+            padding: 4px 10px; border-radius: 6px;
+            font-size: 0.7rem; font-weight: 700; z-index: 3;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-remove {
+            position: absolute; top: 8px; right: 8px;
+            background: rgba(239, 68, 68, 0.9); color: white;
+            width: 24px; height: 24px; border-radius: 50%;
+            display: none; align-items: center; justify-content: center;
+            z-index: 4; cursor: pointer; border: none; font-size: 12px;
+        }
+        .photo-slot.has-image:hover .btn-remove { display: flex; }
+
+        .boton-publicar {
+            margin-top: 20px; padding: 18px;
+            background: #2563eb; color: white;
+            border-radius: 12px; border: none;
+            font-size: 1.1rem; font-weight: 800; cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+        }
+        .boton-publicar:hover { transform: translateY(-2px); background: #1d4ed8; }
+
+        @media (max-width: 600px) {
+            .photo-manager { grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; }
+            .photo-slot { height: 100px; }
+            .photo-slot.main { grid-column: span 3; height: 200px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contenedor-navegacion"></div>
+    
+    <div class="page-container">
+        <h1>Anunciar un Producto</h1>
+
+        <form id="form-producto" action="php/vender.php" method="POST" enctype="multipart/form-data">
+            
+            <div class="input-group">
+                <label>Galería del Producto</label>
+                <div class="photo-manager">
+                    <!-- Slot Principal -->
+                    <div class="photo-slot main" id="slot-0">
+                        <span class="tag-main">PRINCIPAL</span>
+                        <input type="file" name="imagen" accept="image/*" required onchange="handleFile(this, 0)">
+                        <div class="slot-content">
+                            <i class="fas fa-camera"></i>
+                            <span>Foto de portada</span>
+                        </div>
+                        <button type="button" class="btn-remove" onclick="removeFile(0)"><i class="fas fa-times"></i></button>
+                    </div>
+
+                    <!-- slots adicionales (9 slots) -->
+                    <script>
+                        for(let i=1; i<=9; i++) {
+                            document.write(`
+                                <div class="photo-slot" id="slot-${i}">
+                                    <input type="file" name="imagenes_extra[]" accept="image/*" onchange="handleFile(this, ${i})">
+                                    <div class="slot-content">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <button type="button" class="btn-remove" onclick="removeFile(${i})"><i class="fas fa-times"></i></button>
+                                </div>
+                            `);
+                        }
+                    </script>
+                </div>
+                <p style="font-size: 0.8rem; color: #64748b; margin-top: 8px;">Consejo: La primera foto es la que aparecerá en los resultados de búsqueda.</p>
+            </div>
+
+            <div class="input-group">
+                <label>Título del anuncio</label>
+                <input type="text" name="nombre" placeholder="Ej: iPhone 13 Pro 128GB - Impecable" required>
+            </div>
+
+            <div class="input-group">
+                <label>Descripción detallada</label>
+                <textarea name="descripcion" placeholder="Cuenta la historia de tu producto: estado, uso, qué incluye..." required></textarea>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="input-group">
+                    <label>Precio (COP)</label>
+                    <input type="number" name="precio" placeholder="$ 0" step="1" min="0" required>
+                </div>
+                <div class="input-group">
+                    <label>Categoría</label>
+                    <select name="categoria" id="select-categoria" required>
+                        <option value="">Selecciona...</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="hidden" name="id_usuario" id="id_usuario">
+            <button type="submit" class="boton-publicar">Publicar anuncio ahora</button>
+        </form>
+    </div>
+
+    <div id="react-success"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script>
+        // 📸 Gestión de Archivos y Previsualización
+        function handleFile(input, index) {
+            const slot = document.getElementById(`slot-${index}`);
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    // Borrar anterior si existe
+                    const existingImg = slot.querySelector('img');
+                    if(existingImg) existingImg.remove();
+
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    slot.appendChild(img);
+                    slot.classList.add('has-image');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function removeFile(index) {
+            const slot = document.getElementById(`slot-${index}`);
+            const input = slot.querySelector('input');
+            const img = slot.querySelector('img');
+            
+            input.value = ""; // Limpiar input
+            if(img) img.remove();
+            slot.classList.remove('has-image');
+        }
+
+        async function cargarCategorias() {
+            try {
+                const resp = await fetch("php/obtener_categorias.php");
+                const data = await resp.json();
+                const select = document.getElementById("select-categoria");
+                data.categorias.forEach(cat => {
+                    const opt = document.createElement("option");
+                    opt.value = cat.id_categoria;
+                    opt.textContent = cat.nombre;
+                    select.appendChild(opt);
+                });
+            } catch(e) {}
+        }
+        cargarCategorias();
+    </script>
+
+    <script type="text/babel">
+        function SuccessAnimation({ onFinish }) {
+            React.useEffect(() => {
+                const timer = setTimeout(() => { onFinish(); }, 2000);
+                return () => clearTimeout(timer);
+            }, []);
+
+            return (
+                <div style={{
+                    position: "fixed", top: 0, left: 0, width: "100%", height: "100%",
+                    background: "rgba(0,0,0,0.6)", display: "flex", justifyContent: "center",
+                    alignItems: "center", zIndex: 9999
+                }}>
+                    <div style={{
+                        background: "#fff", padding: "50px", borderRadius: "24px",
+                        textAlign: "center", boxShadow: "0 20px 50px rgba(0,0,0,0.3)",
+                        animation: "pop .4s ease-out"
+                    }}>
+                        <div style={{ fontSize: "80px", color: "#22c55e", marginBottom: "20px" }}>✔</div>
+                        <h2 style={{ fontSize: "1.8rem", color: "#0f172a" }}>¡Anuncio Publicado!</h2>
+                        <p style={{ color: "#64748b" }}>Tu producto ya está visible para todos.</p>
+                    </div>
+                    <style>{`@keyframes pop { from { transform: scale(0.8); opacity:0; } to { transform: scale(1); opacity:1; } }`}</style>
+                </div>
+            );
+        }
+
+        document.getElementById("form-producto").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const id = localStorage.getItem("id_usuario");
+            if (!id) return alert("Inicia sesión para vender.");
+
+            const form = new FormData(e.target);
+            form.append("id_vendedor", id);
+
+            try {
+                const resp = await fetch("php/vender.php", { method: "POST", body: form });
+                const data = await resp.json();
+                if (data.success || data.exito) {
+                    ReactDOM.createRoot(document.getElementById("react-success"))
+                        .render(<SuccessAnimation onFinish={() => window.location.href = "perfil.html"} />);
+                } else {
+                    alert(data.message || data.mensaje);
+                }
+            } catch(e) { alert("Error al conectar con el servidor."); }
+        });
+    </script>
+
+    <div id="contenedor-pie"></div>
+</body>
+</html>

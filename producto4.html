@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPad - TiendaOnline</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <!-- Aquí se carga la navegación (igual que index) -->
+    <div id="contenedor-navegacion"></div>
+    <script src="carrito.js"></script>
+    <!-- Contenido específico del producto -->
+    <main class="contenido-principal">
+        <div class="contenedor-ancho">
+            <div class="ficha-producto">
+                <div class="imagen-producto">
+                    <img src="imagendes de productos/image4.jpg" alt="iPad">
+                </div>
+                <div class="info-producto">
+                    <h1>iPad</h1>
+                    <p class="precio-grande">$999.99</p>
+                    <div class="calificacion">★★★★★ (4.8/5)</div>
+                    <p class="descripcion-producto">
+                        El iPhone 15 Pro redefine lo que es posible en un smartphone.
+                        Con el chip A17 Pro y cámara de 48MP, ofrece un rendimiento excepcional.
+                    </p>
+                    <ul class="lista-caracteristicas">
+                        <li>Chip A17 Pro</li>
+                        <li>Pantalla Super Retina XDR 6.1"</li>
+                        <li>Cámara 48MP</li>
+                        <li>Construcción en titanio</li>
+                    </ul>
+                    <!-- boton de compra funcional -->
+                    <div class="botones-accion">
+                        <button class="boton boton-rojo agregar-carrito" data-id="4" data-nombre="iPad"
+                            data-precio="999.99" data-imagen="image4.jpg">
+                            Agregar al Carrito
+                        </button>
+                        <button class="boton boton-blanco">Comprar Ahora</button>
+                    </div>
+    </main>
+
+    <!-- Aquí se carga el pie de página (igual que index) -->
+    <div id="contenedor-pie"></div>
+    <script src="verificar-sesion.js"></script>
+    <script src="cargar-componentes.js"></script>
+</body>
+
+</html>

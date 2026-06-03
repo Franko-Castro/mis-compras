@@ -1,0 +1,351 @@
+DOCUMENTO DE CONTENIDO DEL SITIO WEB "Mis compras"
+
+=== 1. Resumen general del proyecto ===
+Nombre visible: Mis compras / TiendaOnline
+Tipo de proyecto: marketplace e-commerce con publicación de productos, gestión de usuarios y carrito de compras.
+Tecnologías principales:
+- Frontend: HTML, CSS, JavaScript
+- Backend: PHP
+- Base de datos: MySQL (conexión desde conexion.php)
+- Recursos adicionales: archivos multimedia e imágenes en carpetas locales.
+
+Arquitectura:
+- Páginas HTML estáticas con partes dinámicas inyectadas por JavaScript.
+- Componentes compartidos: barra de navegación y pie de página cargados mediante JavaScript.
+- Backend PHP expone endpoints JSON para obtener categorías, productos, login, registro, checkout, ventas y más.
+- Almacenamiento local en browser: carrito en localStorage y sesión de usuario en localStorage.
+
+Carpeta extra encontrada: bakend/ (servidor Node.js independiente con rutas para usuarios, productos y pedidos). Puede ser un backend alternativo o un proyecto adicional no integrado directamente con el frontend PHP actual.
+
+=== 2. Páginas principales y contenido ===
+
+=== index.html ===
+Título: TiendaOnline - Inicio
+
+Secciones principales:
+- Bienvenido a Mis compras
+- Los mejores productos de la región
+- Enlaces a categorías:
+  - Ver Smartphones
+  - Ver Laptops
+  - Frutas y Verduras
+  - Hogar y decoracion
+  - Carnes y Mariscos
+  - Ropa y moda
+  - Belleza y Cuidado Personal
+
+Carrusel de promociones con textos:
+- Proyecto de preservación — Porcada compra que hagas es un apoyo para su preservación
+- No cesitas un local para vender — incia a vender desde casa
+- AYUDANOS A CUIDARLOS — Porcada compra que hagas es un apoyo para su preservación
+- LIQUIDACIÓN HOT SALE — Hasta 35% OFF en Tecnología
+- ENVÍOS GRATIS — En compras superiores a $100.000
+- NUEVA TEMPORADA — Moda y accesorios
+
+Productos destacados:
+- iPhone 15 Pro — $999
+- MacBook Pro M3 — $1,599
+- iMac 24" — $2,500
+- iPad Air — $1,000
+- Mac Mini M2 — $1,500
+
+Modal de acceso/registro:
+- Login: correo electrónico, contraseña, botón Acceder.
+- Registro: nombre completo, correo electrónico, contraseña, botón Registrarse.
+
+=== acerca.html ===
+Título: Acerca de Nosotros — MisCompras
+
+Contenido:
+- Comercio para todos — Innovación, servicio y confianza en un solo lugar.
+- Nuestra historia: conectar emprendedores locales con su mercado, democratizar el comercio digital y apoyar la conservación de flora y fauna regional.
+- Objetivos:
+  - Conectar 500 emprendimientos locales en dos años.
+  - Facilitar inclusión digital.
+  - Fomentar compradores recurrentes.
+  - Destinar un porcentaje de ventas a conservación.
+  - Crear experiencia accesible e intuitiva.
+- Lista de metas de desarrollo: versionamiento, estándares, CRUD completo, seguridad y rendimiento.
+- Proyectos de investigación y conservación:
+  - Monitoreo de jaguares
+  - Reforestación nativa
+  - Aves migratorias
+  - Humedales
+  - Monitoreo de anfibios
+
+=== buscar.html ===
+Título: Resultados de busqueda
+
+Contenido:
+- Título dinámico de resultados
+- Contenedor de estado de resultados
+- Grilla de productos generada por buscar.js
+
+=== categorias.html ===
+Contenido:
+- Lista de categorías cargada dinámicamente usando php/obtener_categorias.php.
+
+=== productos.html ===
+Título: Todos los Productos
+
+Contenido:
+- Productos por Categoría
+- Checkbox "Mostrar sólo mis productos"
+- Mensaje de filtro y estado dinámico
+- Contenedor dinámico de productos cargado con php/obtener_productos_por_categoria.php
+
+=== carrito de compras.html ===
+Título: Carrito de Compras
+
+Contenido:
+- Tu Carrito de Compras
+- Lista de items inyectada por carrito.js
+- Total dinámico
+- Botón Finalizar Compra que llama a php/checkout.php
+
+=== publicar_producto.html ===
+Título: Publicar Producto
+
+Formulario:
+- Galería de imágenes con primera foto principal y hasta 9 imágenes extras.
+- Título del anuncio
+- Descripción detallada
+- Precio en COP
+- Categoría
+- Botón Publicar anuncio ahora
+
+=== editar_producto.html ===
+Título: Editar Producto | MisCompras
+
+Contenido:
+- Formulario para modificar producto con campos de nombre, descripción, precio, imagen y botones de guardar o cancelar.
+
+=== perfil.html ===
+Título: Mi Perfil - MisCompras
+
+Contenido:
+- Página de perfil con avatar, portada, información de usuario y diseño visual avanzado.
+
+=== vender.html ===
+Título: Vender Producto | Mis compras
+
+Contenido:
+- Formulario de publicación de producto simple.
+- Campos: nombre, descripción, precio USD, imagen del producto.
+- Mensaje de resultado dinámico.
+
+=== vendedor.html ===
+Título: Perfil del Vendedor - MisCompras
+
+Contenido:
+- Página de perfil de vendedor con imagen de portada, avatar, nombre, información, rating, contacto y sección de descripción.
+
+=== gracias.html ===
+Título: Gracias por tu compra
+
+Contenido:
+- Mensaje de agradecimiento: 🎉 ¡Gracias por tu compra!
+- Confirmación de pedido procesado correctamente.
+- Botón Volver al inicio.
+
+=== producto1.html ===
+Título: iPhone 15 Pro - TiendaOnline
+
+Contenido del producto:
+- Nombre: iPhone 15 Pro
+- Precio: $999.99
+- Calificación estimada: ★★★★★ (4.8/5)
+- Descripción: chip A17 Pro, cámara 48MP, rendimiento excepcional.
+- Características: Chip A17 Pro, pantalla Super Retina XDR 6.1", cámara 48MP, titanio.
+- Botones: Agregar al Carrito, Comprar Ahora.
+
+=== ejemplo de otras páginas de producto ===
+- producto2.html, producto3.html, producto4.html, producto.5.html muestran productos similares y son páginas de ejemplo de catálogo.
+- Ver Smartphones.html y Ver Laptops.html son páginas específicas de categorías para mostrar secciones de dispositivos.
+
+=== 3. Componentes de navegación y pie ===
+=== navegacion.html ===
+Contenido:
+- Logo y enlace a home.
+- Buscador con placeholder "Buscar productos...".
+- Menú principal con enlaces a Inicio, Productos, Carrito, Mi Perfil, Iniciar Sesión, Cerrar Sesión.
+- Submenú de categorías cargado por JS.
+
+=== pie-pagina.html ===
+Contenido:
+- Nombre "Mis compras" y descripción breve.
+- Redes sociales: Facebook, Twitter, Instagram.
+- Enlaces de producto: Smartphones, Laptops.
+- Enlaces de información: Sobre Nosotros, Términos y Condiciones, Política de Privacidad, Envíos y Devoluciones.
+- Contacto de ejemplo: info@tiendaonline.com, +1 234 567 8900, 123 Calle Principal, Ciudad.
+- Pie inferior: © 2024 Mis compras. Todos los derechos reservados.
+
+=== 4. Scripts JavaScript clave y sus responsabilidades ===
+
+=== cargar-componentes.js ===
+Función principal:
+- Carga `navegacion.html` y `pie-pagina.html` en páginas que los usan.
+- Inicializa el menú hamburguesa, resalta la página activa y actualiza el menú según la sesión.
+- Inicia el buscador que envía consultas a php/buscar_productos.php.
+- Contiene la lógica de búsqueda en el header y la inyección de resultados.
+
+=== verificar-sesion.js ===
+- Archivo de compatibilidad que evita 404, la lógica real de sesión se maneja en cargar-componentes.js.
+
+=== login.js ===
+Funcionalidad:
+- Captura el formulario de login.
+- Envía credenciales a php/login.php por POST.
+- Procesa la respuesta JSON.
+- Guarda `id_usuario` y `nombre_usuario` en localStorage si el login fue exitoso.
+- Redirige a perfil.html después de un login exitoso.
+- Muestra alertas y manejo de errores si la respuesta no es válida.
+
+=== productos.js ===
+Funcionalidad:
+- Obtiene productos agrupados por categoría desde php/obtener_productos_por_categoria.php.
+- Renderiza secciones de categoría y tarjetas de producto.
+- Permite filtrar para mostrar sólo productos propios del usuario logueado.
+- Muestra mensajes si no hay productos o si el usuario no tiene productos publicados.
+
+=== buscar.js ===
+Funcionalidad:
+- Realiza búsqueda de producto por texto usando php/buscar_productos.php.
+- Realiza búsqueda por categoría usando php/buscar_por_categoria.php.
+- Crea tarjetas de producto dinámicamente.
+- Maneja rutas de imagen con múltiples intentos de directorio.
+- Actualiza el título de resultados según la búsqueda.
+
+=== carrito.js ===
+Funcionalidad:
+- Almacena el carrito en localStorage con clave `miTienda_carrito_v1`.
+- Agrega, elimina y limpia items del carrito.
+- Calcula el total del carrito.
+- Realiza checkout enviando los datos a php/checkout.php.
+- Muestra modal de éxito y redirige a gracias.html.
+- Renderiza la interfaz del carrito en carrito de compras.html.
+
+=== otros scripts JS importantes ===
+- perfil.js: probablemente maneja datos del perfil de usuario y carga de información en perfil.html.
+- perfil-producto.js: probablemente carga la ficha de producto y detalles del vendedor.
+- mis_productos.js: administra la lista de productos del usuario si está logueado.
+- modal-registro.js y registro-modal.js: controlan la apertura/cierre de modales y la UI de registro.
+- vender.js: maneja el proceso de publicación de productos desde vender.html.
+- acera.js y destacados.js: scripts auxiliares específicos de las secciones de la página `acerca.html` y destacados en el home.
+
+=== 5. Backend PHP y API ===
+
+=== conexion.php ===
+Detalles de conexión a la base de datos:
+- Host: 127.0.0.1
+- Usuario: root
+- Contraseña: (vacía)
+- Base de datos: tienda_online
+- Puerto: 522
+
+=== php/registro.php ===
+- Registra un usuario nuevo.
+- Valida campos vacíos.
+- Hashea contraseña con password_hash.
+- Evita correos duplicados.
+- Responde JSON con éxito o error.
+- Mensajes:
+  - ⚠️ Faltan campos.
+  - 🎉 ¡Registro exitoso!
+  - ❌ Error al registrar el usuario.
+  - ⚠️ Este correo ya está registrado.
+
+=== php/login.php ===
+- Procesa login de usuario.
+- Verifica contraseña con password_verify.
+- Inicia sesión PHP y devuelve datos de usuario.
+- Responde JSON.
+- Mensajes:
+  - Faltan campos.
+  - Inicio de sesión exitoso
+  - Contraseña incorrecta.
+  - Correo no registrado.
+
+=== php/vender.php ===
+- Publica un producto nuevo.
+- Verifica sesión activa o recibe id_vendedor.
+- Valida nombre, descripción y precio.
+- Maneja imagen principal obligatoria.
+- Inserta producto en BD y guarda imágenes extra.
+- Usa transacción SQL para mayor integridad.
+- Mensajes:
+  - No hay sesión activa. Inicia sesión para publicar.
+  - ⚠️ Todos los campos son obligatorios.
+  - ⚠️ Debes subir al menos la imagen principal.
+  - ⚠️ Error al subir la imagen principal a la carpeta.
+  - ✅ Producto publicado correctamente.
+  - ❌ Error: [mensaje de error interno]
+
+=== php/obtener_categorias.php ===
+- Devuelve todas las categorías ordenadas por nombre.
+- JSON con `exito: true` y `categorias`.
+
+=== php/obtener_productos_por_categoria.php ===
+- Recupera productos con categoría y vendedor.
+- Une tablas productos, categorias y usuarios.
+- Agrupa productos por categoría.
+- Responde JSON con `categorias` y lista de productos.
+
+=== php/obtener_producto.php ===
+- Probablemente devuelve detalles de un solo producto.
+
+=== php/obtener_productos_por_categoria.php ===
+- Devuelve productos agrupados para la vista de catálogo.
+
+=== Otros endpoints PHP y su función probable ===
+- php/actualizar_producto.php: actualiza productos existentes.
+- php/eliminar_producto.php: elimina productos.
+- php/guardar_producto.php: crea o guarda productos.
+- php/guardar_resena.php: guarda reseñas de productos.
+- php/obtener_resenas.php: obtiene reseñas para un producto.
+- php/obtener_usuario.php: obtiene datos de usuario.
+- php/obtener_vendedor.php: obtiene información del vendedor.
+- php/checkout.php: procesa la compra desde el carrito.
+- php/buscar_productos.php: búsqueda general de productos por texto.
+- php/buscar_por_categoria.php: búsqueda de productos por categoría.
+- php/actualizar_fotos.php: actualiza fotos de perfil o producto.
+- php/actualizar_perfil.php: actualiza datos de perfil.
+- php/mis_productos.php: devuelve productos del usuario logueado.
+- php/editar-producto.php: endpoint para editar producto desde formulario.
+- php/promedio_calificacion.php: calcula promedio de calificaciones.
+- php/producto.php: probablemente devuelve datos o página de producto.
+
+=== 6. Base de datos y estructura implícita ===
+Tablas relevantes (según uso en PHP):
+- usuarios: id_usuario, nombre, email, contrasena.
+- categorias: id_categoria, nombre.
+- productos: id_producto, nombre, descripcion, precio, imagen, id_vendedor, id_categoria, fecha_publicacion.
+- imagenes_productos: id_producto, ruta (opcional, si existe).
+- posiblemente reseñas y pedidos según otros endpoints.
+
+=== 7. Observaciones adicionales ===
+- El sitio usa localStorage para persistir carrito y sesión.
+- Muchas páginas dependen de datos dinámicos; sin PHP o sin servidor, las páginas quedan parcialmente estáticas.
+- El frontend y backend están diseñados para trabajar juntos en un entorno LAMP.
+- Hay un backend Node.js adicional en `bakend/` que sugiere otra posible versión o API no usada por el frontend actual.
+- El documento generado ahora tiene un contexto completo para que una IA entienda:
+  1) qué hace el sitio
+  2) qué páginas contiene
+  3) qué endpoints expone
+  4) qué datos maneja cada parte
+  5) cómo se almacena la sesión y el carrito
+
+=== 8. Cómo usar este documento para la IA ===
+- Usa este archivo como contexto inicial para explicar el proyecto.
+- Pide a la IA un análisis de flujos de usuario: registro, login, publicar producto, buscar, carrito, checkout.
+- Pide mejoras de seguridad: manejo de archivos, validaciones, sesiones.
+- Pide un plan de refactorización: separar frontend/backend, estandarizar endpoints, mejorar UX.
+- Pide un listado de errores potenciales: rutas de imagen frágiles, PHP sin sanitización completa, uso de localStorage como fuente de verdad.
+
+=== 9. Recomendaciones rápidas para la IA ===
+- Priorizar seguridad en login/registro y upload de imágenes.
+- Confirmar que `conexion.php` usa puerto 522 y base `tienda_online`.
+- Verificar que los scripts consumen JSON con claves `exito`/`success` y `mensaje`/`message`.
+- Tratar `bakend/` como un proyecto Node.js paralelo, no integrado si se requiere la versión actual PHP.
+
+=== Fin del documento ===

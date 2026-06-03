@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hogar y Decoración — MisCompras</title>
+    <!-- Estilos globales del sitio -->
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== ESTILOS PROPIOS DE ESTA PÁGINA ===== */
+        body {
+            background:
+                linear-gradient(rgba(240, 244, 248, 0.55), rgba(248, 250, 252, 0.55)),
+                url('imagenes/monstera.jpg') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-attachment: fixed !important;
+        }
+
+        /* Hero con imagen de fondo */
+        .hogar-hero {
+            position: relative;
+            height: 420px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .hogar-hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hogar-hero .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 40%, rgba(0, 0, 0, 0.1));
+        }
+
+        .hogar-hero-content {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            padding: 0 48px;
+            max-width: 560px;
+        }
+
+        .hogar-hero-content h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .hogar-hero-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .hogar-hero-content a {
+            display: inline-block;
+            background: #e53935;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .hogar-hero-content a:hover {
+            background: #b71c1c;
+        }
+
+        /* ===== GALERÍA BENTO ===== */
+        .bento-titulo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: 320px 280px;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .bento-card {
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .bento-card:hover {
+            transform: scale(1.02);
+        }
+
+        .bento-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .bento-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.15) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            transition: background 0.3s;
+        }
+
+        .bento-card:hover .bento-card-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.25) 60%, transparent 100%);
+        }
+
+        .bento-card-overlay h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0 0 4px;
+        }
+
+        .bento-card-overlay p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* posiciones bento */
+        .bento-sala {
+            grid-column: span 8;
+            grid-row: 1;
+        }
+
+        .bento-recamara {
+            grid-column: span 4;
+            grid-row: 1;
+        }
+
+        .bento-cocina {
+            grid-column: span 5;
+            grid-row: 2;
+        }
+
+        .bento-comedor {
+            grid-column: span 7;
+            grid-row: 2;
+        }
+
+        /* ===== SECCIÓN DE PRODUCTOS DINÁMICOS ===== */
+        .seccion-hogar-productos {
+            background: #f1f4fa;
+            border-radius: 20px;
+            padding: 36px 40px;
+            margin-bottom: 48px;
+        }
+
+        .seccion-hogar-productos h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1a1a2e;
+        }
+
+        /* Reutiliza la grilla y tarjeta del sitio (.grilla-productos / .tarjeta-producto) */
+        .mensaje-vacio {
+            text-align: center;
+            padding: 48px 20px;
+            color: #ffffff;
+            font-size: 1.05rem;
+        }
+
+        .mensaje-vacio i {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 12px;
+            color: #ccc;
+        }
+
+        /* ===== QUOTE FINAL ===== */
+        .hogar-quote {
+            text-align: center;
+            padding: 48px 24px;
+            max-width: 700px;
+            margin: 0 auto 48px;
+        }
+
+        .hogar-quote i {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .hogar-quote blockquote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: #ffffff;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .hogar-quote hr {
+            width: 60px;
+            border: 2px solid #ffffff;
+            margin: 20px auto 0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hogar-hero {
+                height: 280px;
+            }
+
+            .hogar-hero-content {
+                padding: 0 24px;
+            }
+
+            .hogar-hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 200px 200px 200px 200px;
+            }
+
+            .bento-sala {
+                grid-column: span 2;
+                grid-row: 1;
+            }
+
+            .bento-recamara {
+                grid-column: span 2;
+                grid-row: 2;
+            }
+
+            .bento-cocina {
+                grid-column: span 2;
+                grid-row: 3;
+            }
+
+            .bento-comedor {
+                grid-column: span 2;
+                grid-row: 4;
+            }
+
+            .seccion-hogar-productos {
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navegación del sitio (incluye buscador) -->
+    <div id="contenedor-navegacion"></div>
+
+    <main class="contenido-principal">
+        <div class="contenedor-ancho">
+
+            <!-- Encabezado de sección -->
+
+
+            <!-- Hero visual -->
+            <div class="hogar-hero">
+                <img src="https://cdn.pixabay.com/photo/2024/09/17/11/19/real-estate-9053405_1280.jpg"
+                    alt="Sala de estar moderna y elegante">
+                <div class="overlay"></div>
+                <div class="hogar-hero-content">
+                    <h1>Tu casa, tu estilo</h1>
+                    <p>Descubre piezas únicas que cuentan tu historia. Desde el minimalismo nórdico hasta el color
+                        regional vibrante.</p>
+                    <a href="buscar.html?categoria=12"><i class="fas fa-search"></i> Explorar productos</a>
+                </div>
+            </div>
+
+            <!-- Galería Bento de ambientes -->
+            <p class="bento-titulo">Inspírate por ambiente</p>
+            <div class="bento-grid">
+
+                <!-- Sala -->
+                <div class="bento-card bento-sala">
+                    <img src="https://cdn.pixabay.com/photo/2024/07/17/07/26/real-estate-8900764_1280.jpg"
+                        alt="Sala de estar">
+                    <div class="bento-card-overlay">
+                        <h3>Inspiración: Sala de Estar</h3>
+                        <p>Muebles diseñados para el confort y la convivencia.</p>
+                    </div>
+                </div>
+
+                <!-- Recámara -->
+                <div class="bento-card bento-recamara">
+                    <img src="https://cdn.pixabay.com/photo/2022/04/14/13/36/bedroom-7132435_1280.jpg" alt="Recámara">
+                    <div class="bento-card-overlay">
+                        <h3>Tu Refugio: Recámara</h3>
+                        <p>Textiles y luz para tu descanso.</p>
+                    </div>
+                </div>
+
+                <!-- Cocina -->
+                <div class="bento-card bento-cocina">
+                    <img src="https://cdn.pixabay.com/photo/2016/01/31/14/32/architecture-1171462_1280.jpg"
+                        alt="Cocina">
+                    <div class="bento-card-overlay">
+                        <h3>Funcionalidad: Cocina</h3>
+                        <p>Accesorios que facilitan tu creatividad.</p>
+                    </div>
+                </div>
+
+                <!-- Comedor -->
+                <div class="bento-card bento-comedor">
+                    <img src="https://cdn.pixabay.com/photo/2017/03/25/23/32/kitchen-2174593_1280.jpg" alt="Comedor">
+                    <div class="bento-card-overlay">
+                        <h3>Compartir: Comedor</h3>
+                        <p>El corazón de las reuniones familiares.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Productos de la categoría Hogar y Decoración cargados dinámicamente -->
+            <div class="seccion-hogar-productos">
+                <h2><i class="fas fa-couch" style="color:#e53935; margin-right:10px;"></i>Productos disponibles</h2>
+                <div id="hogar-productos-container" class="grilla-productos">
+                    <!-- Se cargan dinámicamente -->
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <i class="fas fa-circle-notch fa-spin"
+                            style="font-size: 2rem; color: #e53935; margin-bottom: 10px;"></i>
+                        <p>Cargando productos...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote inspiracional -->
+            <div class="hogar-quote">
+                <i class="fas fa-quote-left"></i>
+                <blockquote>
+                    "Tu casa no es solo un lugar donde vives, es el reflejo de tus sueños
+                    y el escenario de tus mejores recuerdos."
+                </blockquote>
+                <hr>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Pie de página del sitio -->
+    <div id="contenedor-pie"></div>
+
+    <!-- Scripts del sitio -->
+    <script src="carrito.js"></script>
+    <script src="cargar-componentes.js"></script>
+
+    <script>
+        async function cargarProductosHogar() {
+            const container = document.getElementById('hogar-productos-container');
+            if (!container) return;
+
+            try {
+                // Obtenemos los productos organizados por categoría desde el backend
+                const resp = await fetch('php/obtener_productos_por_categoria.php');
+                const data = await resp.json();
+
+                if (!data || !data.exito || !data.categorias) {
+                    throw new Error("Datos inválidos del servidor");
+                }
+
+                // Buscamos productos de Hogar y Decoración (id_categoria = 12) y Artesanías (id_categoria = 24)
+                const categoriaHogar = data.categorias.find(cat => parseInt(cat.id_categoria) === 12);
+                const categoriaArtesanias = data.categorias.find(cat => parseInt(cat.id_categoria) === 24);
+
+                let productosAmostrar = [];
+                if (categoriaHogar && categoriaHogar.productos) {
+                    productosAmostrar = productosAmostrar.concat(categoriaHogar.productos);
+                }
+                if (categoriaArtesanias && categoriaArtesanias.productos) {
+                    productosAmostrar = productosAmostrar.concat(categoriaArtesanias.productos);
+                }
+
+                if (productosAmostrar.length === 0) {
+                    container.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #64748b;">
+                            <i class="fas fa-box-open" style="font-size: 3rem; margin-bottom: 15px; color: #cbd5e1;"></i>
+                            <p style="font-size: 1.1rem; font-weight: 500;">No hay productos disponibles por el momento.</p>
+                        </div>`;
+                    return;
+                }
+
+                container.innerHTML = '';
+                productosAmostrar.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'tarjeta-producto';
+
+                    const imgPath = p.imagen ? `imagenes/${p.imagen}` : 'imagenes/default-product.svg';
+                    const precioFormateado = `$${parseFloat(p.precio).toLocaleString('es-CO', { minimumFractionDigits: 0 })}`;
+
+                    card.innerHTML = `
+                        <img src="${imgPath}" alt="${p.nombre}" 
+                             onerror="this.onerror=null; this.src='imagendes de productos/${p.imagen}'; this.onerror=()=>this.src='imagenes/default-product.svg'">
+                        <h3>${p.nombre}</h3>
+                        <p class="precio-destacado">${precioFormateado}</p>
+                        <p class="vendedor-nombre" style="font-size: 0.85rem; color: #64748b; margin: 8px 0;">
+                            Publicado por: <strong>${p.vendedor || 'Vendedor'}</strong>
+                        </p>
+                        <div style="display:flex; margin-top:10px;">
+                            <a href="producto.html?id=${p.id_producto}"
+                               class="boton-pequeno"
+                               style="flex:1; text-align:center; background:#3b82f6; color:white;
+                                      text-decoration:none; border-radius:4px; padding:8px;">
+                                Ver más
+                            </a>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+
+            } catch (err) {
+                console.error(err);
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #ef4444;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                        <p style="font-size: 1.1rem; font-weight: 500;">No se pudieron cargar los productos.</p>
+                        <small>${err.message || 'Error de conexión'}</small>
+                    </div>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarProductosHogar);
+    </script>
+</body>
+
+</html>

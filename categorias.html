@@ -1,0 +1,28 @@
+<ul id="lista-categorias"></ul>
+
+<script>
+async function cargarCategorias() {
+    const resp = await fetch("php/obtener_categorias.php");
+    const data = await resp.json();
+
+    if (!data.exito) return;
+
+    const lista = document.getElementById("lista-categorias");
+
+    data.categorias.forEach(cat => {
+        lista.innerHTML += `
+            <li><a href="categoria.html?id=${cat.id_categoria}">
+                ${cat.nombre}
+            </a></li>
+        `;
+    });
+}
+
+cargarCategorias();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const id = localStorage.getItem("id_usuario");
+    document.getElementById("id_usuario").value = id;
+});
+</script>

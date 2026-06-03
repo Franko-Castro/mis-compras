@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutas y Verduras — MisCompras</title>
+
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== FONDO GENERAL ===== */
+        body {
+            background:
+                linear-gradient(rgba(240, 255, 244, 0.75), rgba(248, 250, 252, 0.75)),
+                url('imagenes/fondo-frutas.jpg') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-attachment: fixed !important;
+        }
+
+        /* ===== HERO ===== */
+        .frutas-hero {
+            position: relative;
+            height: 420px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .frutas-hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .frutas-hero .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right,
+                    rgba(0, 0, 0, 0.70) 40%,
+                    rgba(0, 0, 0, 0.10));
+        }
+
+        .frutas-hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            padding: 0 48px;
+            max-width: 600px;
+        }
+
+        .frutas-hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .frutas-hero-content p {
+            font-size: 1.1rem;
+            opacity: .95;
+            margin-bottom: 24px;
+        }
+
+        .frutas-hero-content a {
+            display: inline-block;
+            background: #16a34a;
+            color: white;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: .3s;
+        }
+
+        .frutas-hero-content a:hover {
+            background: #ffffff;
+        }
+
+        /* ===== BENTO ===== */
+
+        .bento-titulo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: 320px 280px;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .bento-card {
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform .3s;
+        }
+
+        .bento-card:hover {
+            transform: scale(1.02);
+        }
+
+        .bento-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bento-card-overlay {
+            position: absolute;
+            inset: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,.65),
+                rgba(0,0,0,.15),
+                transparent
+            );
+        }
+
+        .bento-card-overlay h3 {
+            color: white;
+            margin: 0 0 5px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .bento-card-overlay p {
+            color: rgba(255,255,255,.9);
+            margin: 0;
+        }
+
+        .bento-frutas {
+            grid-column: span 8;
+            grid-row: 1;
+        }
+
+        .bento-verduras {
+            grid-column: span 4;
+            grid-row: 1;
+        }
+
+        .bento-organicos {
+            grid-column: span 5;
+            grid-row: 2;
+        }
+
+        .bento-campesinos {
+            grid-column: span 7;
+            grid-row: 2;
+        }
+
+        /* ===== PRODUCTOS ===== */
+
+        .seccion-frutas-productos {
+            background: #f0fdf4;
+            border-radius: 20px;
+            padding: 36px 40px;
+            margin-bottom: 48px;
+        }
+
+        .seccion-frutas-productos h2 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: #14532d;
+        }
+
+        .mensaje-vacio {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        .mensaje-vacio i {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* ===== QUOTE ===== */
+
+        .frutas-quote {
+            text-align: center;
+            padding: 48px 24px;
+            max-width: 800px;
+            margin: 0 auto 48px;
+        }
+
+        .frutas-quote i {
+            font-size: 2.5rem;
+            color: #166534;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .frutas-quote blockquote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: #f7f7f7;
+            line-height: 1.7;
+        }
+
+        .frutas-quote hr {
+            width: 60px;
+            border: 2px solid #f6f6f6;
+            margin: 20px auto 0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media(max-width:768px) {
+
+            .frutas-hero {
+                height: 280px;
+            }
+
+            .frutas-hero-content {
+                padding: 24px;
+            }
+
+            .frutas-hero-content h1 {
+                font-size: 1.9rem;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 220px);
+            }
+
+            .bento-frutas,
+            .bento-verduras,
+            .bento-organicos,
+            .bento-campesinos {
+                grid-column: span 1;
+                grid-row: auto;
+            }
+
+            .seccion-frutas-productos {
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="contenedor-navegacion"></div>
+
+    <main class="contenido-principal">
+        <div class="contenedor-ancho">
+
+            <!-- HERO -->
+
+            <div class="frutas-hero">
+
+                <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=1400"
+                    alt="Frutas frescas">
+
+                <div class="overlay"></div>
+
+                <div class="frutas-hero-content">
+                    <h1>Frutas y Verduras Frescas</h1>
+
+                    <p>
+                        Productos recién cosechados directamente de agricultores
+                        locales para llevar calidad y sabor a tu mesa.
+                    </p>
+
+                    <a href="buscar.html?categoria=5">
+                        <i class="fas fa-search"></i>
+                        Explorar productos
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- BENTO -->
+
+            <p class="bento-titulo">Descubre productos frescos</p>
+
+            <div class="bento-grid">
+
+                <div class="bento-card bento-frutas">
+                    <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?q=80&w=1200">
+                    <div class="bento-card-overlay">
+                        <h3>Frutas Frescas</h3>
+                        <p>Dulces, jugosas y llenas de vitaminas.</p>
+                    </div>
+                </div>
+
+                <div class="bento-card bento-verduras">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200">
+                    <div class="bento-card-overlay">
+                        <h3>Verduras</h3>
+                        <p>Frescura para cada comida.</p>
+                    </div>
+                </div>
+
+                <div class="bento-card bento-organicos">
+                    <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?q=80&w=1200">
+                    <div class="bento-card-overlay">
+                        <h3>Orgánicos</h3>
+                        <p>Producción responsable y natural.</p>
+                    </div>
+                </div>
+
+                <div class="bento-card bento-campesinos">
+                    <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1200">
+                    <div class="bento-card-overlay">
+                        <h3>Productores Locales</h3>
+                        <p>Apoya el trabajo del campo colombiano.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PRODUCTOS -->
+
+            <div class="seccion-frutas-productos">
+
+                <h2>
+                    <i class="fas fa-apple-alt" style="color:#16a34a;"></i>
+                    Productos disponibles
+                </h2>
+
+                <div id="productos-contenedor" class="grilla-productos">
+
+                    <div style="grid-column:1/-1;text-align:center;padding:40px;">
+                        <i class="fas fa-circle-notch fa-spin"
+                           style="font-size:2rem;color:#16a34a;"></i>
+                        <p>Cargando productos...</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FRASE -->
+
+            <div class="frutas-quote">
+                <i class="fas fa-leaf"></i>
+
+                <blockquote>
+                    "La mejor alimentación comienza con ingredientes frescos,
+                    cultivados con dedicación y respeto por la tierra."
+                </blockquote>
+
+                <hr>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="contenedor-pie"></div>
+
+    <script src="carrito.js"></script>
+    <script src="cargar-componentes.js"></script>
+
+    <script>
+        async function cargarProductosFrutas() {
+
+            const container = document.getElementById('productos-contenedor');
+
+            try {
+
+                const resp = await fetch('php/obtener_productos_por_categoria.php');
+                const data = await resp.json();
+
+                if (!data.exito || !data.categorias) {
+                    throw new Error("Datos inválidos");
+                }
+
+                const categoria = data.categorias.find(
+                    c => parseInt(c.id_categoria) === 5
+                );
+
+                if (!categoria || !categoria.productos.length) {
+
+                    container.innerHTML = `
+                        <div class="mensaje-vacio">
+                            <i class="fas fa-seedling"></i>
+                            <p>No hay productos disponibles por ahora.</p>
+                        </div>
+                    `;
+
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                categoria.productos.forEach(p => {
+
+                    const card = document.createElement('div');
+
+                    card.className = 'tarjeta-producto';
+
+                    const imgPath = p.imagen
+                        ? `imagenes/${p.imagen}`
+                        : 'imagenes/default-product.svg';
+
+                    const precio = `$${parseFloat(
+                        p.precio || p.price
+                    ).toLocaleString('es-CO')}`;
+
+                    card.innerHTML = `
+                        <img src="${imgPath}"
+                             alt="${p.nombre}"
+                             onerror="this.src='imagenes/default-product.svg'">
+
+                        <h3>${p.nombre}</h3>
+
+                        <p class="precio-destacado">${precio}</p>
+
+                        <div style="display:flex;margin-top:10px;">
+                            <a href="producto.html?id=${p.id_producto}"
+                               class="boton-pequeno"
+                               style="flex:1;text-align:center;">
+                                Ver más
+                            </a>
+                        </div>
+                    `;
+
+                    container.appendChild(card);
+
+                });
+
+            } catch (err) {
+
+                container.innerHTML = `
+                    <div class="mensaje-vacio">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Error al cargar productos.</p>
+                    </div>
+                `;
+
+                console.error(err);
+            }
+        }
+
+        document.addEventListener(
+            'DOMContentLoaded',
+            cargarProductosFrutas
+        );
+    </script>
+
+</body>
+
+</html>
+```

@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acerca de Nosotros — MisCompras</title>
+    <link rel="stylesheet" href="acerca.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- HERO CON VIDEO -->
+    <header class="hero-video">
+        <video autoplay muted loop playsinline>
+            <source src="videos/Diseño sin título.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <img src="imagenes/logo.png" class="hero-logo-big">
+            <h1>Comercio para todos</h1>
+            <p>Innovación, servicio y confianza en un solo lugar.</p>
+            <a href="index.html" class="btn primary">Explorar Tienda <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </header>
+
+    <!-- SECCIÓN HISTORIA - IMAGEN MÁS CLARA -->
+    <section class="hero history-section">
+        <img src="imagenes/banana.jpg" alt="Imagen de fondo animada" class="hero-bg">
+        <div class="hero-content">
+            <h1>Nuestra historia</h1>
+            <p>
+                Nuestro proyecto nace en respuesta a una necesidad tangible de nuestra comunidad local: la desconexión
+                entre los pequeños emprendedores y su mercado potencial. Observamos cómo microemprendimientos, talentos
+                locales y productores de bienes regionales (como artesanías, electrónicos reparados o frutas frescas)
+                enfrentaban enormes barreras para digitalizarse y competir en un mercado cada vez más globalizado.
+
+                Más allá de lo económico, identificamos una amenaza al patrimonio natural: la pérdida de la flora local
+                en peligro de extinción y la falta de conciencia sobre la fauna regional. Así, decidimos que una
+                plataforma de comercio podía ser también un canal para la conservación y la educación.
+
+                Movidos por el deseo de fortalecer el tejido económico y social del municipio, creamos esta plataforma.
+                No es solo un "mercado en línea"; es una herramienta diseñada para democratizar el acceso al comercio
+                digital, permitiendo que cualquier persona, sin importar su edad, ubicación o recursos, pueda iniciar y
+                hacer crecer su proyecto desde casa, conectando directamente con su comunidad.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 1 - OBJETIVOS CON CARRUSEL -->
+    <section class="section-alt reveal">
+        <div class="section-container">
+            <div class="section-text">
+                <h2><i class="fas fa-bullseye"></i> Nuestros objetivos</h2>
+                <p>
+                    Nuestro objetivo principal es lanzar y consolidar una plataforma digital que en dos años conecte a
+                    más de 500 emprendimientos locales con su comunidad. Para lograrlo, nos enfocamos en: 1) Facilitar
+                    la inclusión digital priorizando a emprendedores sin experiencia o local físico; 2) Fomentar un
+                    ecosistema activo con cientos de compradores recurrentes; 3) Generar impacto tangible destinando un
+                    porcentaje de las ventas a la conservación de la flora y fauna regional; y 4) Garantizar una
+                    experiencia accesible con herramientas intuitivas que simplifiquen la publicación y comunicación
+                    entre usuarios.
+
+                </p>
+                <ul class="bullets">
+                    <li>Crear proyecto con herramientas de versionamiento</li>
+                    <li>Cumplir estándares de codificación</li>
+                    <li>Implementar CRUD completo</li>
+                    <li>Garantizar seguridad y rendimiento óptimo</li>
+                </ul>
+            </div>
+
+            <!-- CARRUSEL AUTOMÁTICO -->
+            <div class="carousel-container">
+                <div class="carousel-slides">
+                    <div class="carousel-slide">
+                        <img src="imagenes/carrusel1.jpeg" alt="Objetivo 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="imagenes/carrusel2.jpeg" alt="Objetivo 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="imagenes/jair.jpg" alt="Objetivo 3">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="imagenes/carrusel4.jpeg" alt="Objetivo 4">
+                    </div>
+                </div>
+
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" data-slide="0"></div>
+                    <div class="carousel-indicator" data-slide="1"></div>
+                    <div class="carousel-indicator" data-slide="2"></div>
+                    <div class="carousel-indicator" data-slide="3"></div>
+                </div>
+
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECCIÓN DE INVESTIGACIONES - CARRUSEL INFINITO -->
+    <section class="research-section reveal">
+        <div class="section-container">
+            <div class="research-header">
+                <h2><i class="fas fa-microscope"></i> Nuestras Investigaciones</h2>
+                <p>Explora los proyectos que apoyamos para la preservación de nuestro patrimonio natural.</p>
+            </div>
+            
+            <div class="research-carousel">
+                <div class="research-track">
+                    <!-- Cards originales -->
+                    <div class="research-card">
+                        <img src="imagenes/titi.jpg" alt="Mono Tití">
+                        <div class="card-overlay">
+                            <h3>Mono Tití Cabeciblanco</h3>
+                            <p>Protección y estudio de hábitat de esta especie críticamente amenazada.</p>
+                            <span class="card-tag">Fauna</span>
+                        </div>
+                    </div>
+                    <div class="research-card">
+                        <img src="imagenes/manglar.jpg" alt="Manglares">
+                        <div class="card-overlay">
+                            <h3>Ecosistema de Manglares</h3>
+                            <p>Restauración y monitoreo de la salud de nuestros manglares costeros.</p>
+                            <span class="card-tag">Flora</span>
+                        </div>
+                    </div>
+                    <div class="research-card">
+                        <img src="imagenes/rana.jpg" alt="Rana Cocoi">
+                        <div class="card-overlay">
+                            <h3>Rana de Cristal y Cocoi</h3>
+                            <p>Investigación sobre la biodiversidad de anfibios en selvas tropicales.</p>
+                            <span class="card-tag">Biodiversidad</span>
+                        </div>
+                    </div>
+                    <div class="research-card">
+                        <img src="imagenes/humedales.jpg" alt="Humedales">
+                        <div class="card-overlay">
+                            <h3>Preservación de Humedales</h3>
+                            <p>Gestión sostenible de recursos hídricos y aves acuáticas regionales.</p>
+                            <span class="card-tag">Ecosistemas</span>
+                        </div>
+                    </div>
+                    <div class="research-card">
+                        <img src="imagenes/pajaro.jpg" alt="Aves">
+                        <div class="card-overlay">
+                            <h3>Avifauna Regional</h3>
+                            <p>Catalogación y protección de rutas migratorias de aves nativas.</p>
+                            <span class="card-tag">Ornitología</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Duplicados para scroll infinito sin saltos -->
+                    <div class="research-card">
+                        <img src="imagenes/titi.jpg" alt="Mono Tití">
+                        <div class="card-overlay">
+                            <h3>Mono Tití Cabeciblanco</h3>
+                            <p>Protección y estudio de hábitat de esta especie críticamente amenazada.</p>
+                            <span class="card-tag">Fauna</span>
+                        </div>
+                    </div>
+                    <div class="research-card">
+                        <img src="imagenes/manglar.jpg" alt="Manglares">
+                        <div class="card-overlay">
+                            <h3>Ecosistema de Manglares</h3>
+                            <p>Restauración y monitoreo de la salud de nuestros manglares costeros.</p>
+                            <span class="card-tag">Flora</span>
+                        </div>
+                    </div>
+                    <div class="research-card">
+                        <img src="imagenes/rana.jpg" alt="Rana Cocoi">
+                        <div class="card-overlay">
+                            <h3>Rana de Cristal y Cocoi</h3>
+                            <p>Investigación sobre la biodiversidad de anfibios en selvas tropicales.</p>
+                            <span class="card-tag">Biodiversidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2 - MISIÓN -->
+    <section class="section-alt reveal">
+        <div class="section-container">
+            <div class="section-text">
+                <h2><i class="fas fa-rocket"></i> Nuestra misión</h2>
+                <p>
+                    Impulsar y conectar el ecosistema de comercio local a través de una plataforma digital inclusiva y
+                    accesible, facilitando el crecimiento de microemprendimientos y negocios locales. Nos comprometemos
+                    a ser un catalizador para el desarrollo económico regional, fomentando la comunicación directa entre
+                    productores y consumidores, y a utilizar nuestro alcance para apoyar la conservación de la flora y
+                    fauna nativas, generando un impacto positivo y sostenible en nuestra comunidad.
+                </p>
+            </div>
+            <div class="section-media">
+                <img src="imagenes/mision.jpeg" alt="Nuestra misión">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3 - VISIÓN -->
+    <section class="section-alt reveal">
+        <div class="section-container">
+            <div class="section-text">
+                <h2><i class="fas fa-eye"></i> Nuestra visión</h2>
+                <p>
+                    Ser la plataforma de referencia y confianza para el comercio local y sostenible en nuestra región,
+                    reconocida por empoderar a generaciones de emprendedores, por ser un pilar para la economía circular
+                    municipal y por contribuir significativamente a la preservación del patrimonio natural local,
+                    convirtiéndonos en un modelo de negocio digital con propósito social y ambiental. Buscamos
+                    convertirnos en la plataforma de comercio electrónico preferida en Colombia,
+                    reconocida por nuestra innovación, confiabilidad y compromiso con el éxito de nuestros usuarios.
+                </p>
+            </div>
+            <div class="section-media">
+                <img src="imagenes/vision2.jpeg" alt="Nuestra visión">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4 - VALORES -->
+    <section class="section-alt reveal">
+        <div class="section-container">
+            <div class="section-text">
+                <h2><i class="fas fa-heart"></i> Nuestros valores</h2>
+                <p>
+                    Actuamos bajo principios fundamentales que guían cada decisión y acción en nuestra plataforma,
+                    garantizando una experiencia excepcional para compradores y vendedores.
+                </p>
+                <div class="values">
+                    <div><i class="fas fa-handshake"></i> Integridad</div>
+                    <div><i class="fas fa-bolt"></i> Agilidad</div>
+                    <div><i class="fas fa-leaf"></i> Responsabilidad</div>
+                    <div><i class="fas fa-lightbulb"></i> Innovación</div>
+                </div>
+            </div>
+            <div class="section-media">
+                <img src="imagenes/equipo de trabajo.jpg" alt="Nuestros valores">
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta reveal">
+        <h2>Únete a la revolución del comercio digital</h2>
+        <p>Vende o compra con confianza desde cualquier dispositivo. Simple, seguro y pensado para ti.</p>
+        <div class="cta-buttons">
+            <!-- Botón protegido: solo redirige si el usuario tiene sesión activa -->
+            <button onclick="irAVender()" class="btn primary large"><i class="fas fa-store"></i> Empezar a vender</button>
+            <a href="index.html" class="btn large"
+                style="background: transparent; border: 2px solid var(--accent); color: var(--accent); margin-left: 20px;">
+                <i class="fas fa-shopping-cart"></i> Explorar productos
+            </a>
+        </div>
+    </section>
+
+    <!-- Modal de Acceso / Registro (solo se muestra si no hay sesión) -->
+    <div id="modal-acceso" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="cerrar-modal" id="cerrar-modal">&times;</span>
+
+            <div class="tabs">
+                <button id="tab-login" class="active">Iniciar Sesión</button>
+                <button id="tab-registro">Crear Cuenta</button>
+            </div>
+
+            <!-- Formulario de inicio de sesión -->
+            <form id="form-login" class="formulario active">
+                <h2>Acceder</h2>
+                <p>¡Bienvenido de nuevo! Por favor, introduce tus datos.</p>
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+                <input type="password" name="contrasena" placeholder="Contraseña" required>
+                <button type="submit">Acceder</button>
+            </form>
+
+            <!-- Formulario de Registro -->
+            <form id="form-registro" class="formulario" action="php/registro.php" method="POST">
+                <h2>Crear Cuenta</h2>
+                <p>Crea una cuenta para empezar a vender.</p>
+                <input type="text" name="nombre" placeholder="Nombre completo" required>
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+                <input type="password" name="contrasena" placeholder="Contraseña" required>
+                <button type="submit">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="acerca.js"></script>
+    <script src="login.js"></script>
+
+    <script>
+        // Redirige a vender si hay sesión; si no, abre el modal de acceso
+        function irAVender() {
+            if (localStorage.getItem('id_usuario')) {
+                window.location.href = 'publicar_producto.html';
+            } else {
+                document.getElementById('modal-acceso').style.display = 'flex';
+            }
+        }
+
+        // Lógica del modal: pestañas y cierre
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal    = document.getElementById('modal-acceso');
+            const cerrar   = document.getElementById('cerrar-modal');
+            const tabLogin = document.getElementById('tab-login');
+            const tabReg   = document.getElementById('tab-registro');
+            const fLogin   = document.getElementById('form-login');
+            const fReg     = document.getElementById('form-registro');
+
+            // Alternar pestañas
+            tabLogin.addEventListener('click', () => {
+                tabLogin.classList.add('active');   tabReg.classList.remove('active');
+                fLogin.classList.add('active');     fReg.classList.remove('active');
+            });
+            tabReg.addEventListener('click', () => {
+                tabReg.classList.add('active');     tabLogin.classList.remove('active');
+                fReg.classList.add('active');       fLogin.classList.remove('active');
+            });
+
+            // Cerrar modal con la X o clic fuera
+            cerrar.addEventListener('click', () => modal.style.display = 'none');
+            window.addEventListener('click', e => {
+                if (e.target === modal) modal.style.display = 'none';
+            });
+
+            // Envío de registro
+            fReg.addEventListener('submit', async e => {
+                e.preventDefault();
+                const resp = await fetch('php/registro.php', { method: 'POST', body: new FormData(e.target) });
+                const data = await resp.json();
+                if (data.success) {
+                    alert('🎉 Registro exitoso. Ahora inicia sesión para continuar.');
+                    tabLogin.click();
+                } else {
+                    alert('⚠️ ' + (data.message || 'Error al registrar.'));
+                }
+            });
+        });
+    </script>
+
+    <!-- Estilos del modal de acceso -->
+    <style>
+        .modal {
+            position: fixed; z-index: 9999; left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex; align-items: center; justify-content: center;
+            animation: fadeIn 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .modal-content {
+            background: #fff; border-radius: 12px; padding: 30px;
+            width: 350px; max-width: 90%;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            position: relative; animation: slideUp 0.4s ease;
+        }
+        .cerrar-modal {
+            position: absolute; top: 10px; right: 16px;
+            font-size: 26px; color: #888; cursor: pointer; transition: 0.2s;
+        }
+        .cerrar-modal:hover { color: #000; }
+        .tabs {
+            display: flex; justify-content: space-around; margin-bottom: 15px;
+        }
+        .tabs button {
+            background: none; border: none; font-weight: bold;
+            padding: 10px 15px; cursor: pointer; color: #666;
+            border-bottom: 3px solid transparent; transition: 0.3s;
+        }
+        .tabs button.active { color: #007bff; border-color: #007bff; }
+        .formulario { display: none; text-align: center; }
+        .formulario.active { display: block; }
+        .formulario h2 { color: #333; margin-bottom: 8px; }
+        .formulario input {
+            width: 100%; margin: 8px 0; padding: 10px;
+            border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
+        }
+        .formulario button {
+            width: 100%; padding: 10px; background: #007bff;
+            color: white; border: none; border-radius: 6px;
+            cursor: pointer; font-weight: bold; transition: 0.3s; margin-top: 8px;
+        }
+        .formulario button:hover { background: #0056d6; }
+        @keyframes fadeIn  { from { opacity: 0; }             to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+</body>
+
+</html>
