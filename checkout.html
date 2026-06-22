@@ -109,7 +109,7 @@ function getOrderId() {
 }
 
 // 🔥 OPCIONAL: traer total desde localStorage o URL
-document.getElementById("total").textContent = "$" + (localStorage.getItem("total") || "0");
+document.getElementById("total").textContent = "$" + Number(localStorage.getItem("total") || "0").toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
 async function enviarComprobante() {
   const archivo = document.getElementById("comprobante").files[0];

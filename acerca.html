@@ -65,10 +65,13 @@
 
                 </p>
                 <ul class="bullets">
-                    <li>Crear proyecto con herramientas de versionamiento</li>
-                    <li>Cumplir estándares de codificación</li>
-                    <li>Implementar CRUD completo</li>
-                    <li>Garantizar seguridad y rendimiento óptimo</li>
+                    <li>Aumentar las ventas de los emprendedores locales</li>
+                    <li>Fomentar un ecosistema activo con cientos de compradores recurrentes</li>
+                    <li>Generar impacto tangible destinando un porcentaje de las ventas a la conservación de la flora y
+                        fauna regional</li>
+                    <li>Garantizar una experiencia accesible con herramientas intuitivas que simplifiquen la publicación
+                        y comunicación
+                        entre usuarios</li>
                 </ul>
             </div>
 
@@ -116,7 +119,7 @@
                 <h2><i class="fas fa-microscope"></i> Nuestras Investigaciones</h2>
                 <p>Explora los proyectos que apoyamos para la preservación de nuestro patrimonio natural.</p>
             </div>
-            
+
             <div class="research-carousel">
                 <div class="research-track">
                     <!-- Cards originales -->
@@ -160,7 +163,7 @@
                             <span class="card-tag">Ornitología</span>
                         </div>
                     </div>
-                    
+
                     <!-- Duplicados para scroll infinito sin saltos -->
                     <div class="research-card">
                         <img src="imagenes/titi.jpg" alt="Mono Tití">
@@ -258,7 +261,8 @@
         <p>Vende o compra con confianza desde cualquier dispositivo. Simple, seguro y pensado para ti.</p>
         <div class="cta-buttons">
             <!-- Botón protegido: solo redirige si el usuario tiene sesión activa -->
-            <button onclick="irAVender()" class="btn primary large"><i class="fas fa-store"></i> Empezar a vender</button>
+            <button onclick="irAVender()" class="btn primary large"><i class="fas fa-store"></i> Empezar a
+                vender</button>
             <a href="index.html" class="btn large"
                 style="background: transparent; border: 2px solid var(--accent); color: var(--accent); margin-left: 20px;">
                 <i class="fas fa-shopping-cart"></i> Explorar productos
@@ -312,21 +316,21 @@
 
         // Lógica del modal: pestañas y cierre
         document.addEventListener('DOMContentLoaded', () => {
-            const modal    = document.getElementById('modal-acceso');
-            const cerrar   = document.getElementById('cerrar-modal');
+            const modal = document.getElementById('modal-acceso');
+            const cerrar = document.getElementById('cerrar-modal');
             const tabLogin = document.getElementById('tab-login');
-            const tabReg   = document.getElementById('tab-registro');
-            const fLogin   = document.getElementById('form-login');
-            const fReg     = document.getElementById('form-registro');
+            const tabReg = document.getElementById('tab-registro');
+            const fLogin = document.getElementById('form-login');
+            const fReg = document.getElementById('form-registro');
 
             // Alternar pestañas
             tabLogin.addEventListener('click', () => {
-                tabLogin.classList.add('active');   tabReg.classList.remove('active');
-                fLogin.classList.add('active');     fReg.classList.remove('active');
+                tabLogin.classList.add('active'); tabReg.classList.remove('active');
+                fLogin.classList.add('active'); fReg.classList.remove('active');
             });
             tabReg.addEventListener('click', () => {
-                tabReg.classList.add('active');     tabLogin.classList.remove('active');
-                fReg.classList.add('active');       fLogin.classList.remove('active');
+                tabReg.classList.add('active'); tabLogin.classList.remove('active');
+                fReg.classList.add('active'); fLogin.classList.remove('active');
             });
 
             // Cerrar modal con la X o clic fuera
@@ -353,48 +357,128 @@
     <!-- Estilos del modal de acceso -->
     <style>
         .modal {
-            position: fixed; z-index: 9999; left: 0; top: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            display: flex; align-items: center; justify-content: center;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             animation: fadeIn 0.3s ease;
             font-family: 'Inter', sans-serif;
         }
+
         .modal-content {
-            background: #fff; border-radius: 12px; padding: 30px;
-            width: 350px; max-width: 90%;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            position: relative; animation: slideUp 0.4s ease;
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            width: 350px;
+            max-width: 90%;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.4s ease;
         }
+
         .cerrar-modal {
-            position: absolute; top: 10px; right: 16px;
-            font-size: 26px; color: #888; cursor: pointer; transition: 0.2s;
+            position: absolute;
+            top: 10px;
+            right: 16px;
+            font-size: 26px;
+            color: #888;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        .cerrar-modal:hover { color: #000; }
+
+        .cerrar-modal:hover {
+            color: #000;
+        }
+
         .tabs {
-            display: flex; justify-content: space-around; margin-bottom: 15px;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
         }
+
         .tabs button {
-            background: none; border: none; font-weight: bold;
-            padding: 10px 15px; cursor: pointer; color: #666;
-            border-bottom: 3px solid transparent; transition: 0.3s;
+            background: none;
+            border: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: 0.3s;
         }
-        .tabs button.active { color: #007bff; border-color: #007bff; }
-        .formulario { display: none; text-align: center; }
-        .formulario.active { display: block; }
-        .formulario h2 { color: #333; margin-bottom: 8px; }
+
+        .tabs button.active {
+            color: #007bff;
+            border-color: #007bff;
+        }
+
+        .formulario {
+            display: none;
+            text-align: center;
+        }
+
+        .formulario.active {
+            display: block;
+        }
+
+        .formulario h2 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
         .formulario input {
-            width: 100%; margin: 8px 0; padding: 10px;
-            border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
         }
+
         .formulario button {
-            width: 100%; padding: 10px; background: #007bff;
-            color: white; border: none; border-radius: 6px;
-            cursor: pointer; font-weight: bold; transition: 0.3s; margin-top: 8px;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 8px;
         }
-        .formulario button:hover { background: #0056d6; }
-        @keyframes fadeIn  { from { opacity: 0; }             to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .formulario button:hover {
+            background: #0056d6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
     </style>
 </body>
 

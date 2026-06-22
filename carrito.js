@@ -207,9 +207,9 @@
 
         <div class="carrito-info">
           <h3>${item.nombre}</h3>
-          <p>$${(+item.precio).toFixed(2)}</p>
+          <p>$${Number(item.precio).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
           <p>Cantidad: <span class="cantidad">${item.cantidad}</span></p>
-          <p>Subtotal: $${(+item.subtotal).toFixed(2)}</p>
+          <p>Subtotal: $${Number(item.subtotal).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
         </div>
 
         <div class="carrito-acciones">
@@ -225,7 +225,7 @@
     });
 
     if (totalSpan) {
-      totalSpan.textContent = `$${window.carrito.getTotal()}`;
+      totalSpan.textContent = `$${Number(window.carrito.getTotal()).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
     }
   };
 

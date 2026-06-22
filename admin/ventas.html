@@ -1119,7 +1119,7 @@
                 data.productos.forEach(p => {
                     prodHtml += `
                         <div style="display: flex; gap: 16px; align-items: center; background: var(--surface-container-low); padding: 12px; border-radius: 12px;">
-                            <img src="../${p.producto_imagen}" style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover;" onerror="this.src='../imagenes/default.png'">
+                            <img src="../imagenes/${p.producto_imagen}" style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover;" onerror="this.src='../imagenes/default.png'">
                             <div style="flex: 1;">
                                 <div style="font-weight: 700; font-size: 0.9rem;">${p.producto_nombre}</div>
                                 <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">

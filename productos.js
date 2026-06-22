@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const precio = document.createElement('p');
         precio.className = 'precio-destacado';
-        precio.textContent = `$${parseFloat(p.precio).toFixed(2)}`;
+        precio.textContent = `$${Number(p.precio).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
 
         const vendedor = document.createElement('p');
         vendedor.className = 'vendedor-nombre';

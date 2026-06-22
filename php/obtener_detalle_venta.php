@@ -29,7 +29,7 @@ if (!$res_venta) {
 
 // 2. Obtener productos de la venta y sus vendedores
 $sql_detalle = "
-    SELECT dv.*, p.nombre as producto_nombre, p.imagen as producto_imagen, ven.nombre as vendedor_nombre, ven.foto_perfil as vendedor_foto
+    SELECT dv.*, p.nombre as producto_nombre, p.precio, p.imagen as producto_imagen, ven.nombre as vendedor_nombre, ven.foto_perfil as vendedor_foto
     FROM detalle_venta dv
     JOIN productos p ON dv.id_producto = p.id_producto
     JOIN usuarios ven ON p.id_vendedor = ven.id_usuario
