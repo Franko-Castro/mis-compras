@@ -803,6 +803,122 @@
             background: var(--surface-container-high);
             color: var(--on-surface-variant);
         }
+
+        /* ========== LIVE POLLING STYLES ========== */
+
+        /* Indicador EN VIVO */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #dcfce7;
+            color: #15803d;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 3px 8px;
+            border-radius: 9999px;
+            border: 1px solid #bbf7d0;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: live-pulse 1.4s ease-in-out infinite;
+        }
+
+        @keyframes live-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        /* Toast de nuevo pedido */
+        #toast-nuevo-pedido {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            background: white;
+            border-radius: 16px;
+            padding: 18px 22px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,87,146,0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            max-width: 340px;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        #toast-nuevo-pedido.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .toast-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-container));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            animation: toast-ring 0.6s ease 0.3s;
+        }
+
+        @keyframes toast-ring {
+            0%   { transform: rotate(0deg); }
+            20%  { transform: rotate(-15deg); }
+            40%  { transform: rotate(15deg); }
+            60%  { transform: rotate(-10deg); }
+            80%  { transform: rotate(5deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .toast-body strong {
+            display: block;
+            font-size: 0.95rem;
+            color: #0f172a;
+            margin-bottom: 3px;
+        }
+
+        .toast-body p {
+            font-size: 0.82rem;
+            color: #64748b;
+            margin: 0;
+        }
+
+        .toast-close {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            color: #94a3b8;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Badge pulsante en pestaña cuando hay nuevo pedido */
+        @keyframes badge-pop {
+            0%   { transform: scale(1); }
+            40%  { transform: scale(1.4); background: #ef4444; color: white; }
+            100% { transform: scale(1); }
+        }
+
+        .badge-nuevo {
+            animation: badge-pop 0.5s ease forwards;
+        }
     </style>
 </head>
 
@@ -864,8 +980,11 @@
             <div class="hero-tile" style="background: var(--surface-container-high); padding: 32px; border-radius: var(--radius-xl); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
                 <div class="label-md" style="color: var(--on-surface-variant); margin-bottom: 16px;">Ingresos Totales</div>
                 <div class="headline-lg" id="ingresos-totales" style="color: var(--primary); font-weight: 800;">$0</div>
-                <div style="margin-top: 16px; color: #059669; font-weight: 600; font-size: 0.875rem;">
-                    <i class="fas fa-trending-up"></i> +12% este mes
+                <div style="margin-top: 12px; color: var(--on-surface-variant); font-size: 0.8rem;">
+                    <span id="ventas-completadas-count">0</span> ventas entregadas
+                </div>
+                <div style="margin-top: 8px; color: #059669; font-weight: 600; font-size: 0.875rem;">
+                    <i class="fas fa-check-circle"></i> Completadas y entregadas
                 </div>
             </div>
         </div>
@@ -897,6 +1016,9 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
                 <h2 class="seccion-titulo" style="margin: 0;">
                     <i class="fas fa-shopping-bag"></i> Gestión de Pedidos
+                    <span class="live-badge" id="live-indicator" style="margin-left: 8px;">
+                        <span class="live-dot"></span> EN VIVO
+                    </span>
                 </h2>
                 <div class="label-md" id="contador-pedidos">0 pedidos nuevos</div>
             </div>
@@ -944,7 +1066,7 @@
         <!-- ESTADÍSTICAS -->
         <div class="estadisticas">
             <div class="estadistica-minimal">
-                <div class="estadistica-icono">
+                <div class="estadistica-icono" style="color: #6366f1;">
                     <i class="fas fa-eye"></i>
                 </div>
                 <div class="estadistica-valor" id="vistas-totales">0</div>
@@ -952,25 +1074,40 @@
             </div>
             
             <div class="estadistica-minimal">
-                <div class="estadistica-icono">
+                <div class="estadistica-icono" style="color: #059669;">
                     <i class="fas fa-shopping-cart"></i>
                 </div>
                 <div class="estadistica-valor" id="ventas-realizadas">0</div>
-                <div class="estadistica-label">Ventas realizadas</div>
+                <div class="estadistica-label">Unidades vendidas</div>
             </div>
             
             <div class="estadistica-minimal">
-                <div class="estadistica-icono">
+                <div class="estadistica-icono" style="color: #f59e0b;">
                     <i class="fas fa-star"></i>
                 </div>
-                <div class="estadistica-valor"><span id="calificacion">0</span>/5</div>
-                <div class="estadistica-label">Calificación</div>
+                <div class="estadistica-valor" style="font-size: 1.5rem;">
+                    <span id="calificacion">0.0</span><span style="font-size:1rem; color:#94a3b8;">/5</span>
+                </div>
+                <div id="estrellas-visual" style="display:flex; justify-content:center; gap:3px; margin: 6px 0;"></div>
+                <div class="estadistica-label"><span id="total-resenas">0</span> reseñas recibidas</div>
             </div>
         </div>
 
     </main>
 
     <div id="contenedor-pie"></div>
+
+    <!-- TOAST: Nuevo Pedido -->
+    <div id="toast-nuevo-pedido">
+        <button class="toast-close" onclick="cerrarToast()">&times;</button>
+        <div class="toast-icon">
+            <i class="fas fa-bell"></i>
+        </div>
+        <div class="toast-body">
+            <strong id="toast-titulo">¡Nuevo pedido recibido!</strong>
+            <p id="toast-detalle">Tienes un nuevo pedido pendiente.</p>
+        </div>
+    </div>
 
     <script src="cargar-componentes.js"></script>
 
@@ -1208,15 +1345,8 @@
                 return;
             }
 
-            // Actualizar el número de productos y las estadísticas (vistas/ventas)
+            // Actualizar el número de productos (las estadísticas las carga cargarEstadisticas())
             document.getElementById("contador-productos").textContent = `${data.productos.length} producto${data.productos.length !== 1 ? 's' : ''}`;
-            document.getElementById("vistas-totales").textContent = data.productos.reduce((sum, p) => sum + (p.vistas || 0), 0);
-            const ventasTotal = data.productos.reduce((sum, p) => sum + (p.ventas || 0), 0);
-            document.getElementById("ventas-realizadas").textContent = ventasTotal;
-            
-            // Calcular ingresos aproximados para el Hero Tile
-            const ingresos = data.productos.reduce((sum, p) => sum + ((p.ventas || 0) * (p.precio || 0)), 0);
-            document.getElementById("ingresos-totales").textContent = `$${ingresos.toLocaleString()}`;
             
             // Crear el diseño de cada tarjeta de producto
             let productosHTML = '';
@@ -1231,8 +1361,8 @@
                             <div class="producto-precio">$${Number(p.precio).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</div>
                             <p class="producto-desc">${p.descripcion ? p.descripcion.substring(0, 80) + '...' : ''}</p>
                             <div class="producto-meta">
-                                <span><i class="fas fa-eye"></i> ${p.vistas || 0} vistas</span>
                                 <span><i class="fas fa-calendar"></i> ${p.fecha_publicacion || 'Reciente'}</span>
+                                <span><i class="fas fa-tag"></i> $${Number(p.precio).toLocaleString('es-CO', {minimumFractionDigits: 0})}</span>
                             </div>
                             <div class="producto-acciones">
                                 <a href="producto.html?id=${p.id_producto}" class="btn-simple btn-ver"><i class="fas fa-eye"></i> Ver</a>
@@ -1297,6 +1427,17 @@
             // Actualizar contadores de las pestañas
             document.getElementById("badge-activos").textContent = ventasActivas.length;
             document.getElementById("badge-historial").textContent = ventasHistorial.length;
+
+            // ===== CALCULAR INGRESOS TOTALES (solo ventas completadas o entregadas) =====
+            const ventasFinalizadas = data.ventas.filter(v => {
+                const est = (v.estado || '').toLowerCase();
+                return est === 'completado' || est === 'entregado';
+            });
+            const ingresosReales = ventasFinalizadas.reduce((sum, v) => sum + (parseFloat(v.total) || 0), 0);
+            
+            // Actualizar el Hero Tile de Ingresos
+            animarContadorIngresos(ingresosReales);
+            document.getElementById("ventas-completadas-count").textContent = ventasFinalizadas.length;
 
             // Determinar qué pedidos mostrar
             const pedidosAMostrar = tabPedidosActual === 'activos' ? ventasActivas : ventasHistorial;
@@ -1400,10 +1541,230 @@
         }
     }
 
+    // ===== ANIMACIÓN DE CONTEO PARA INGRESOS =====
+    function animarContadorIngresos(valorFinal) {
+        const el = document.getElementById("ingresos-totales");
+        if (!el) return;
+        const duracion = 1200; // ms
+        const pasos = 40;
+        const intervalo = duracion / pasos;
+        let paso = 0;
+        const timer = setInterval(() => {
+            paso++;
+            const progreso = paso / pasos;
+            // Easing: ease-out
+            const valorActual = Math.round(valorFinal * (1 - Math.pow(1 - progreso, 3)));
+            el.textContent = '$' + valorActual.toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            if (paso >= pasos) {
+                clearInterval(timer);
+                el.textContent = '$' + valorFinal.toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            }
+        }, intervalo);
+    }
+
+    // ========== ESTADÍSTICAS REALES DEL VENDEDOR ==========
+    async function cargarEstadisticas() {
+        const id = localStorage.getItem("id_usuario");
+        if (!id) return;
+
+        try {
+            const resp = await fetch(`php/estadisticas_vendedor.php?id_vendedor=${id}`);
+            const data = await resp.json();
+
+            if (!data.exito) return;
+
+            // — Vistas totales (animadas)
+            animarContadorNumero("vistas-totales", data.vistas || 0);
+
+            // — Ventas realizadas (animadas)
+            animarContadorNumero("ventas-realizadas", data.ventas || 0);
+
+            // — Calificación promedio
+            const cal = parseFloat(data.calificacion) || 0;
+            document.getElementById("calificacion").textContent = cal.toFixed(1);
+            document.getElementById("total-resenas").textContent = data.total_resenas || 0;
+
+            // Renderizar estrellas visuales
+            const contenedorEstrellas = document.getElementById("estrellas-visual");
+            if (contenedorEstrellas) {
+                let estrellasHTML = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (cal >= i) {
+                        // Estrella llena
+                        estrellasHTML += `<i class="fas fa-star" style="color:#f59e0b; font-size:0.9rem;"></i>`;
+                    } else if (cal >= i - 0.5) {
+                        // Media estrella
+                        estrellasHTML += `<i class="fas fa-star-half-alt" style="color:#f59e0b; font-size:0.9rem;"></i>`;
+                    } else {
+                        // Estrella vacía
+                        estrellasHTML += `<i class="far fa-star" style="color:#cbd5e1; font-size:0.9rem;"></i>`;
+                    }
+                }
+                contenedorEstrellas.innerHTML = estrellasHTML;
+            }
+
+        } catch (err) {
+            console.error("Error al cargar estadísticas:", err);
+        }
+    }
+
+    // ===== ANIMACIÓN GENÉRICA PARA CONTADORES NUMÉRICOS =====
+    function animarContadorNumero(elementId, valorFinal) {
+        const el = document.getElementById(elementId);
+        if (!el || valorFinal === 0) {
+            if (el) el.textContent = '0';
+            return;
+        }
+        const duracion = 1000;
+        const pasos = 35;
+        const intervalo = duracion / pasos;
+        let paso = 0;
+        const timer = setInterval(() => {
+            paso++;
+            const progreso = paso / pasos;
+            const valorActual = Math.round(valorFinal * (1 - Math.pow(1 - progreso, 3)));
+            el.textContent = valorActual.toLocaleString('es-CO');
+            if (paso >= pasos) {
+                clearInterval(timer);
+                el.textContent = valorFinal.toLocaleString('es-CO');
+            }
+        }, intervalo);
+    }
+
+    // ===== SISTEMA DE POLLING EN TIEMPO REAL =====
+    let _pedidosConocidos = new Set(); // IDs de ventas ya vistas
+    let _pollingInterval = null;
+    let _toastTimer = null;
+    let _primeraVez = true;    // La primera carga no dispara notificación
+
+    function iniciarPolling() {
+        // Primer tick inmediato (ya lo hace DOMContentLoaded)
+        // Lanzar polling cada 15 segundos
+        _pollingInterval = setInterval(async () => {
+            await verificarNuevosPedidos();
+        }, 15000);
+
+        // Pausar polling cuando la pestaña pierde el foco (ahorro de recursos)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                clearInterval(_pollingInterval);
+                _pollingInterval = null;
+            } else {
+                // Al volver, comprobamos inmediatamente y reanudamos
+                verificarNuevosPedidos();
+                _pollingInterval = setInterval(async () => {
+                    await verificarNuevosPedidos();
+                }, 15000);
+            }
+        });
+    }
+
+    async function verificarNuevosPedidos() {
+        const id_vendedor = localStorage.getItem("id_usuario");
+        if (!id_vendedor) return;
+
+        try {
+            const resp = await fetch(`php/vendedor_obtener_ventas.php?id_vendedor=${id_vendedor}&_t=${Date.now()}`);
+            const data = await resp.json();
+
+            if (!data.ventas) return;
+
+            const ventasActivas = data.ventas.filter(v => {
+                const est = (v.estado || '').toLowerCase();
+                return est !== 'completado' && est !== 'cancelado' && est !== 'entregado';
+            });
+
+            // Detectar IDs nuevos (no vistos antes)
+            const nuevos = ventasActivas.filter(v => !_pedidosConocidos.has(String(v.id_venta)));
+
+            if (!_primeraVez && nuevos.length > 0) {
+                // ★ HAY PEDIDOS NUEVOS → actualizar UI y notificar
+                cargarPedidos(); // Refrescar lista completa
+                cargarEstadisticas(); // Actualizar estadísticas
+                mostrarToastNuevoPedido(nuevos);
+                animarBadgePedidos();
+            }
+
+            // Registrar todos los IDs activos como conocidos
+            ventasActivas.forEach(v => _pedidosConocidos.add(String(v.id_venta)));
+
+            _primeraVez = false;
+
+        } catch (err) {
+            console.warn("Polling error:", err);
+        }
+    }
+
+    function mostrarToastNuevoPedido(nuevos) {
+        const toast = document.getElementById('toast-nuevo-pedido');
+        if (!toast) return;
+
+        const count = nuevos.length;
+        document.getElementById('toast-titulo').textContent =
+            count === 1 ? '\u00a1Nuevo pedido recibido!' : `\u00a1${count} nuevos pedidos!`;
+        document.getElementById('toast-detalle').textContent =
+            count === 1
+                ? `${nuevos[0].comprador_nombre} compró ${nuevos[0].producto}`
+                : `Tienes ${count} pedidos nuevos pendientes de atender.`;
+
+        // Mostrar
+        toast.classList.add('show');
+
+        // Auto-cerrar a los 7 segundos
+        clearTimeout(_toastTimer);
+        _toastTimer = setTimeout(() => cerrarToast(), 7000);
+
+        // Actualizar título de la pestaña del navegador
+        const tituloOriginal = document.title;
+        let parpadeos = 0;
+        const parpadeo = setInterval(() => {
+            document.title = parpadeos % 2 === 0
+                ? `\uD83D\uDD14 (${count}) Nuevo pedido - MisCompras`
+                : tituloOriginal;
+            parpadeos++;
+            if (parpadeos >= 10) {
+                clearInterval(parpadeo);
+                document.title = tituloOriginal;
+            }
+        }, 800);
+    }
+
+    function cerrarToast() {
+        const toast = document.getElementById('toast-nuevo-pedido');
+        if (toast) toast.classList.remove('show');
+        clearTimeout(_toastTimer);
+    }
+
+    function animarBadgePedidos() {
+        const badge = document.getElementById('badge-activos');
+        if (!badge) return;
+        badge.classList.remove('badge-nuevo');
+        // Forzar reflow para reiniciar animación
+        void badge.offsetWidth;
+        badge.classList.add('badge-nuevo');
+        setTimeout(() => badge.classList.remove('badge-nuevo'), 600);
+    }
+
     // Iniciar la carga de pedidos al entrar
     document.addEventListener("DOMContentLoaded", () => {
         cargarMisProductos();
-        cargarPedidos();
+        cargarEstadisticas();
+
+        // Carga inicial de pedidos + registrar IDs conocidos
+        cargarPedidos().then(() => {
+            // Marcar todos los pedidos actuales como ya conocidos
+            const id_vendedor = localStorage.getItem("id_usuario");
+            fetch(`php/vendedor_obtener_ventas.php?id_vendedor=${id_vendedor}`)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.ventas) {
+                        data.ventas.forEach(v => _pedidosConocidos.add(String(v.id_venta)));
+                    }
+                    _primeraVez = false;
+                    iniciarPolling(); // Arrancar polling DESPUÉS de registrar los conocidos
+                })
+                .catch(() => { _primeraVez = false; iniciarPolling(); });
+        });
     });
 
     // Ir a la página de edición de producto

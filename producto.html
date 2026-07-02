@@ -397,6 +397,55 @@
 
         document.getElementById("product-desc").innerHTML = p.descripcion.replace(/\n/g, '<br>');
 
+        // ── DETECCIÓN: ¿el usuario logueado es el vendedor? ──
+        const uid = parseInt(localStorage.getItem("id_usuario") || "0");
+        const esVendedor = uid && uid === parseInt(p.id_vendedor);
+
+        if (esVendedor) {
+            // Reemplazar botones de compra por aviso
+            const areaActions = document.querySelector('.area-actions');
+            if (areaActions) {
+                areaActions.innerHTML = `
+                    <div style="
+                        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+                        border: 1.5px solid #bfdbfe;
+                        border-radius: 14px;
+                        padding: 22px 20px;
+                        text-align: center;
+                    ">
+                        <i class="fas fa-store" style="font-size: 2rem; color: #3b82f6; margin-bottom: 10px; display:block;"></i>
+                        <strong style="color: #1e40af; font-size: 1rem;">Este es tu producto</strong>
+                        <p style="color: #3b82f6; font-size: 0.88rem; margin: 8px 0 0;">
+                            Los vendedores no pueden comprar sus propios productos.
+                        </p>
+                    </div>
+                `;
+            }
+
+            // Reemplazar formulario de reseña por aviso
+            const formReview = document.getElementById('form-review');
+            if (formReview) {
+                formReview.outerHTML = `
+                    <div style="
+                        margin-top: 24px;
+                        border-top: 1px solid #e2e8f0;
+                        padding-top: 20px;
+                        background: #fff7ed;
+                        border-radius: 12px;
+                        padding: 18px;
+                        border: 1.5px solid #fed7aa;
+                        text-align: center;
+                    ">
+                        <i class="fas fa-ban" style="color: #f97316; font-size: 1.4rem; margin-bottom: 8px; display:block;"></i>
+                        <strong style="color: #9a3412;">No puedes reseñar tu propio producto</strong>
+                        <p style="color: #c2410c; font-size: 0.85rem; margin: 6px 0 0;">
+                            Solo los compradores pueden dejar opiniones.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
         loadStatus();
         loadReviews();
 
@@ -455,7 +504,20 @@
       if (res.exito) { alert("¡Publicada!"); e.target.reset(); loadStatus(); loadReviews(); }
     });
 
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", () => {
+      init();
+
+      // Guardar en ultimas vistas
+      if (productId) {
+          let vistos = localStorage.getItem("vistos");
+          vistos = vistos ? vistos.split(",") : [];
+          // Remover si ya existe para ponerlo al principio
+          vistos = vistos.filter(id => id !== productId);
+          vistos.unshift(productId);
+          if (vistos.length > 10) vistos.pop();
+          localStorage.setItem("vistos", vistos.join(","));
+      }
+    });
   </script>
   <script src="carrito.js"></script>
   <script src="cargar-componentes.js"></script>
