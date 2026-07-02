@@ -23,9 +23,25 @@ if ($res->num_rows === 0) {
     exit;
 }
 
+$producto = $res->fetch_assoc();
+
+// Fetch extra images
+$sql_extra = "SELECT ruta FROM imagenes_productos WHERE id_producto = ?";
+$stmt_extra = $conn->prepare($sql_extra);
+$stmt_extra->bind_param("i", $id);
+$stmt_extra->execute();
+$res_extra = $stmt_extra->get_result();
+
+$imagenes_extra = [];
+while ($row = $res_extra->fetch_assoc()) {
+    $imagenes_extra[] = $row['ruta'];
+}
+$producto['imagenes_extra'] = $imagenes_extra;
+$stmt_extra->close();
+
 echo json_encode([
     "exito" => true,
-    "producto" => $res->fetch_assoc()
+    "producto" => $producto
 ]);
 
 $stmt->close();
