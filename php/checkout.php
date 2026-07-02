@@ -18,6 +18,38 @@ if (!$data || !isset($data['usuario_id']) || !isset($data['total'])) {
 $id_usuario = $data['usuario_id'];
 $total = $data['total'];
 
+// ── VALIDACIÓN: el vendedor no puede comprar sus propios productos ──
+if (isset($data['items']) && is_array($data['items'])) {
+    $ids_productos = array_map(fn($i) => intval($i['id']), $data['items']);
+
+    if (!empty($ids_productos)) {
+        $placeholders = implode(',', array_fill(0, count($ids_productos), '?'));
+        $types = str_repeat('i', count($ids_productos));
+
+        $stmtCheck = $conn->prepare("
+            SELECT COUNT(*) as total
+            FROM productos
+            WHERE id_producto IN ($placeholders)
+              AND id_vendedor = ?
+        ");
+
+        // bind_param dinámico: productos + id_usuario al final
+        $bindValues = array_merge($ids_productos, [$id_usuario]);
+        $stmtCheck->bind_param($types . 'i', ...$bindValues);
+        $stmtCheck->execute();
+        $rowCheck = $stmtCheck->get_result()->fetch_assoc();
+        $stmtCheck->close();
+
+        if (intval($rowCheck['total']) > 0) {
+            echo json_encode([
+                "success" => false,
+                "message" => "No puedes comprar tus propios productos"
+            ]);
+            exit;
+        }
+    }
+}
+
 // guardar venta
 $conn->begin_transaction();
 

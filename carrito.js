@@ -172,11 +172,24 @@
     const btn = e.target.closest('.agregar-carrito');
     if (!btn) return;
 
+    // Bloquear si el usuario es el vendedor del producto
+    const uid = localStorage.getItem("id_usuario");
+    const vendedorId = btn.dataset.vendedorId || btn.dataset.vendedor_id || null;
+    if (uid && vendedorId && String(uid) === String(vendedorId)) {
+      btn.textContent = '\u26D4 Es tu producto';
+      btn.style.background = '#94a3b8';
+      setTimeout(() => {
+        btn.textContent = 'Agregar al Carrito';
+        btn.style.background = '';
+      }, 1800);
+      return;
+    }
+
     const { id, nombre, precio, imagen } = btn.dataset;
 
     window.carrito.addItem({ id, nombre, precio, imagen });
 
-    btn.textContent = 'Añadido ✓';
+    btn.textContent = 'A\u00f1adido \u2713';
     setTimeout(() => (btn.textContent = 'Agregar al Carrito'), 900);
   });
 

@@ -105,49 +105,6 @@
         <h2>Productos Destacados</h2>
         <div class="grilla-productos">
 
-          <div class="tarjeta-producto">
-            <img src="imagendes de productos/ipone15.jpg" alt="iPhone">
-            <h3>iPhone 15 Pro</h3>
-            <p class="precio-destacado">$999</p>
-            <div style="display: flex; margin-top: 10px;">
-              <a href="producto.html?id=1" class="boton-pequeno"
-                style="flex: 1; text-align: center; background: #3b82f6; color: white; text-decoration: none; border-radius: 4px; padding: 8px;">Ver
-                más</a>
-            </div>
-          </div>
-
-          <div class="tarjeta-producto">
-            <img src="imagendes de productos/images.jpg" alt="MacBook">
-            <h3>MacBook Pro M3</h3>
-            <p class="precio-destacado">$1,599</p>
-            <div style="display: flex; margin-top: 10px;">
-              <a href="producto.html?id=2" class="boton-pequeno"
-                style="flex: 1; text-align: center; background: #3b82f6; color: white; text-decoration: none; border-radius: 4px; padding: 8px;">Ver
-                más</a>
-            </div>
-          </div>
-
-          <div class="tarjeta-producto">
-            <img src="imagendes de productos/imagen3.jpg" alt="iMac">
-            <h3>iMac 24"</h3>
-            <p class="precio-destacado">$2,500</p>
-            <div style="display: flex; margin-top: 10px;">
-              <a href="producto.html?id=3" class="boton-pequeno"
-                style="flex: 1; text-align: center; background: #3b82f6; color: white; text-decoration: none; border-radius: 4px; padding: 8px;">Ver
-                más</a>
-            </div>
-          </div>
-
-          <div class="tarjeta-producto">
-            <img src="imagendes de productos/image4.jpg" alt="iPad">
-            <h3>iPad Air</h3>
-            <p class="precio-destacado">$1,000</p>
-            <div style="display: flex; margin-top: 10px;">
-              <a href="producto.html?id=4" class="boton-pequeno"
-                style="flex: 1; text-align: center; background: #3b82f6; color: white; text-decoration: none; border-radius: 4px; padding: 8px;">Ver
-                más</a>
-            </div>
-          </div>
 
           <div class="tarjeta-producto">
             <img src="imagendes de productos/imagen5.jpg" alt="iMac mini">
@@ -162,13 +119,25 @@
         </div>
       </section>
 
-      <!-- Sección: destacados por categoría -->
-      <section class="seccion-destacados">
-        <h2>Lo más destacado por categoría</h2>
-        <div id="destacados-por-categoria">Cargando...</div>
+      <!-- Secciones dinámicas -->
+      <section class="seccion-productos">
+        <h2>Lo más vendido </h2>
+        <div id="seccion-mas-vendidos" class="grilla-productos">Cargando...</div>
       </section>
+
+      <section class="seccion-productos">
+        <h2>Últimas vistas relacionadas </h2>
+        <div id="seccion-ultimas-vistas" class="grilla-productos">Cargando...</div>
+      </section>
+
+      <section class="seccion-productos">
+        <h2>Alimentos frescos </h2>
+        <div id="seccion-alimentos" class="grilla-productos">Cargando...</div>
+      </section>
+
     </div>
   </main>
+  
 
   <div id="contenedor-pie"></div>
   <script src="carrito.js"></script>
@@ -423,6 +392,48 @@
 
   <script src="destacados.js"></script>
   <script src="cargar-componentes.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const vistos = localStorage.getItem("vistos") || "";
+      try {
+        const res = await fetch(`php/index_secciones.php?vistos=${vistos}`);
+        const data = await res.json();
+
+        if (data.exito) {
+          renderGrid("seccion-mas-vendidos", data.mas_vendidos);
+          renderGrid("seccion-ultimas-vistas", data.ultimas_vistas);
+          renderGrid("seccion-alimentos", data.alimentos);
+        }
+      } catch (e) {
+        console.error("Error cargando secciones", e);
+      }
+    });
+
+    function renderGrid(containerId, items) {
+      const cont = document.getElementById(containerId);
+      if (!items || items.length === 0) {
+        cont.innerHTML = "<p>No hay productos disponibles por ahora.</p>";
+        return;
+      }
+
+      let html = "";
+      items.forEach(p => {
+        html += `
+          <div class="tarjeta-producto">
+            <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='imagenes/default-product.svg'">
+            <h3>${p.nombre}</h3>
+            <p class="precio-destacado">$${Number(p.precio).toLocaleString('es-CO')}</p>
+            <div style="display: flex; margin-top: 10px;">
+              <a href="producto.html?id=${p.id_producto}" class="boton-pequeno"
+                style="flex: 1; text-align: center; background: #3b82f6; color: white; text-decoration: none; border-radius: 4px; padding: 8px;">Ver más</a>
+            </div>
+          </div>
+        `;
+      });
+      cont.innerHTML = html;
+    }
+  </script>
 </body>
 
 </html>

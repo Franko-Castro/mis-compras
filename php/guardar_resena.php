@@ -36,6 +36,19 @@ if ($res->num_rows > 0) {
 }
 $check->close();
 
+// ── NUEVA VALIDACIÓN: el vendedor no puede reseñar sus propios productos ──
+$checkVendedor = $conn->prepare("SELECT id_vendedor FROM productos WHERE id_producto = ?");
+$checkVendedor->bind_param("i", $id_producto);
+$checkVendedor->execute();
+$rowVendedor = $checkVendedor->get_result()->fetch_assoc();
+$checkVendedor->close();
+
+if ($rowVendedor && intval($rowVendedor['id_vendedor']) === $id_usuario) {
+    echo json_encode(["exito" => false, "mensaje" => "No puedes reseñar tus propios productos"]);
+    $conn->close();
+    exit;
+}
+
 $stmt = $conn->prepare(
     "INSERT INTO resenas (id_producto, id_usuario, calificacion, comentario)
      VALUES (?, ?, ?, ?)"
