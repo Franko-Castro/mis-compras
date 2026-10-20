@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const cont = document.getElementById('destacados-por-categoria');
 
+  // Si no existe el contenedor en esta página, no hacer peticiones innecesarias.
+  if (!cont) return;
+
   async function cargar() {
     try {
       const resp = await fetch('php/obtener_destacados_por_categoria.php');
