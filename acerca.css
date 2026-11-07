@@ -64,6 +64,7 @@ body {
   width: 150px;
   margin-bottom: 25px;
   animation: float 3s ease-in-out infinite;
+  mix-blend-mode: screen;
 }
 
 @keyframes float {

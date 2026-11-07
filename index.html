@@ -85,16 +85,68 @@
   <main class="contenido-principal">
     <div class="contenedor-ancho">
       <section class="seccion-bienvenida">
-        <h1>Bienvenido a Mis compras</h1>
-        <p>Los mejores productos de la región</p>
-        <div class="botones-principales">
-          <a href="Ver Smartphones.html" class="boton boton-azul">Ver Smartphones</a>
-          <a href="Ver Laptops.html" class="boton boton-rojo">Ver Laptops</a>
-          <a href="frutas_y_verduras.html" class="boton boton-verde">Frutas y Verduras</a>
-          <a href="hogar_y_decoracion.html" class="boton boton-naranja">Hogar y decoracion</a>
-          <a href="carnes_y_mariscos.html" class="boton boton-rosado">Carnes y Mariscos</a>
-          <a href="ropa_y_accesorios.html" class="boton boton-cafe">Ropa y moda</a>
-          <a href="belleza_y_cuidado_personal.html" class="boton boton-canela">Belleza y Cuidado Personal</a>
+        <div class="bienvenida-panel">
+          <h1>Bienvenido a Mis Compras</h1>
+          <p>Del campo y la tecnología directo a tus manos — calidad garantizada y entregas rápidas.</p>
+          <div class="categorias-carrusel">
+            <button class="flecha-categorias anterior" type="button" aria-label="Ver categorías anteriores" aria-controls="categorias-bienvenida">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+            </button>
+            <nav id="categorias-bienvenida" class="categorias-bienvenida" aria-label="Explorar categorías">
+            <a href="Ver Smartphones.html" class="tarjeta-categoria categoria-smartphones">
+              <span class="icono-categoria" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none"><rect x="10" y="3.5" width="16" height="29" rx="4" /><path d="M15 7h6M16 28.5h4" /><circle cx="18" cy="24" r="1" /></svg>
+              </span>
+              <span class="nombre-categoria">Smartphones</span>
+              <span class="detalle-categoria">Celulares</span>
+            </a>
+            <a href="Ver Laptops.html" class="tarjeta-categoria categoria-tecnologia">
+              <span class="icono-categoria" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none"><rect x="7" y="5" width="22" height="19" rx="2" /><path d="M4 28h28l-2 3H6l-2-3Z" /><path d="M12 9h12v10H12z" /></svg>
+              </span>
+              <span class="nombre-categoria">Tecnología</span>
+              <span class="detalle-categoria">Tech &amp; Devices</span>
+            </a>
+            <a href="frutas_y_verduras.html" class="tarjeta-categoria categoria-frescos">
+              <span class="icono-categoria" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none"><path d="M18 13c-4-5-11-2-11 5 0 6 4 12 9 12 2 0 2-1 2-1s1 1 3 1c5 0 9-6 9-12 0-7-7-10-12-5Z" /><path d="M18 13V6m0 4c2-4 6-5 9-3-1 4-5 6-9 5" /></svg>
+              </span>
+              <span class="nombre-categoria">Frutas &amp; Verduras</span>
+              <span class="detalle-categoria">Frescos</span>
+            </a>
+            <a href="hogar_y_decoracion.html" class="tarjeta-categoria categoria-hogar">
+              <span class="icono-categoria" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none"><path d="m5 17 13-11 13 11v14H5V17Z" /><path d="M14 31V20h8v11M10 17h16" /></svg>
+              </span>
+              <span class="nombre-categoria">Hogar &amp; Deco</span>
+              <span class="detalle-categoria">Home</span>
+            </a>
+            <a href="carnes_y_mariscos.html" class="tarjeta-categoria categoria-carnes">
+              <span class="icono-categoria" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none"><path d="M29 10c-4-5-12-5-18 0-6 4-8 11-4 17 4 6 13 7 20 2 6-5 7-13 2-19Z" /><circle cx="14" cy="18" r="4" /><path d="M23 15c2 2 3 5 2 8" /></svg>
+              </span>
+              <span class="nombre-categoria">Carnes &amp; Mariscos</span>
+              <span class="detalle-categoria">Frescos</span>
+            </a>
+            <a href="ropa_y_accesorios.html" class="tarjeta-categoria categoria-moda">
+              <span class="icono-categoria" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none"><path d="m12 7 6 3 6-3 8 5-4 7-4-2v13H12V17l-4 2-4-7 8-5Z" /><path d="M14 8c0 3 2 4 4 4s4-1 4-4" /></svg>
+              </span>
+              <span class="nombre-categoria">Ropa &amp; Moda</span>
+              <span class="detalle-categoria">Moda</span>
+            </a>
+            <a href="belleza_y_cuidado_personal.html" class="tarjeta-categoria categoria-belleza">
+              <span class="icono-categoria" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none"><rect x="5" y="14" width="13" height="17" rx="3" /><path d="M9 14V8h5v6m-5-8h5" /><rect x="22" y="11" width="9" height="20" rx="3" /><path d="M24 17h5M26.5 7v4" /></svg>
+              </span>
+              <span class="nombre-categoria">Belleza</span>
+              <span class="detalle-categoria">Cuidado personal</span>
+            </a>
+            </nav>
+            <button class="flecha-categorias siguiente" type="button" aria-label="Ver más categorías" aria-controls="categorias-bienvenida">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -125,6 +177,72 @@
       <section class="seccion-productos">
         <h2>Últimas vistas relacionadas </h2>
         <div id="seccion-ultimas-vistas" class="grilla-productos">Cargando...</div>
+      </section>
+
+      <section class="banner-servicios" aria-labelledby="titulo-servicios">
+        <div class="banner-servicios-principal">
+          <div class="banner-servicios-texto">
+            <span class="banner-servicios-etiqueta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Talento regional
+            </span>
+            <h2 id="titulo-servicios">Mantenimiento especializado <span>en tu región</span></h2>
+            <h3>En instalaciones y mantenimiento</h3>
+            <p class="banner-servicios-descripcion">Encuentra profesionales para tu hogar u oficina con el respaldo de Mis Compras.</p>
+            <a class="boton-servicios" href="mailto:info@tiendaonline.com?subject=Solicitud%20de%20servicio">
+              Solicitar servicio
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14m-7-7 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+          <div class="banner-servicios-ilustracion">
+            <img class="foto-servicio" src="imagenes/electrico.jpg" alt="Electricista trabajando en un tablero eléctrico" loading="lazy">
+            <span class="sello-servicios">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m12 3 2.4 2.1 3.2-.2.8 3.1 2.7 1.8-1.2 3 1.2 3-2.7 1.8-.8 3.1-3.2-.2L12 23l-2.4-2.1-3.2.2-.8-3.1-2.7-1.8 1.2-3-1.2-3 2.7-1.8.8-3.1 3.2.2L12 3Z" />
+                <path d="m8.5 13 2.2 2.2 4.8-5" />
+              </svg>
+              Atención<br>confiable
+            </span>
+          </div>
+        </div>
+        <div class="beneficios-servicios">
+          <div class="titulo-beneficios">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M11 20a7 7 0 0 1-1.2-13.9C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z" />
+              <path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12" />
+            </svg>
+            <h3>¿Por qué elegirnos en Mis Compras?</h3>
+          </div>
+          <article class="beneficio-servicio">
+            <span class="icono-beneficio" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 20 6v5c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V6l8-3Z" /><path d="m8.5 12 2.2 2.2 4.8-5" /></svg>
+            </span>
+            <span><strong>Profesionales verificados</strong><small>Personal confiable para tu hogar</small></span>
+          </article>
+          <article class="beneficio-servicio">
+            <span class="icono-beneficio" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 7h18v13H3zM7 7V4h10v3M7 12h10M7 16h6" /></svg>
+            </span>
+            <span><strong>Precios claros</strong><small>Cotización previa, sin sorpresas</small></span>
+          </article>
+          <article class="beneficio-servicio">
+            <span class="icono-beneficio" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+            </span>
+            <span><strong>Atención oportuna</strong><small>Ayuda cerca de ti</small></span>
+          </article>
+          <article class="beneficio-servicio">
+            <span class="icono-beneficio" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
+            </span>
+            <span><strong>Talento regional</strong><small>Mano de obra local calificada</small></span>
+          </article>
+        </div>
       </section>
 
       <section class="seccion-productos">
@@ -311,6 +429,38 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const categories = document.getElementById('categorias-bienvenida');
+      const previousCategoryButton = document.querySelector('.flecha-categorias.anterior');
+      const nextCategoryButton = document.querySelector('.flecha-categorias.siguiente');
+
+      if (categories && previousCategoryButton && nextCategoryButton) {
+        const updateCategoryButtons = () => {
+          const maxScroll = categories.scrollWidth - categories.clientWidth;
+          const startOffset = parseFloat(getComputedStyle(categories).paddingLeft) || 0;
+          previousCategoryButton.disabled = categories.scrollLeft <= startOffset + 1;
+          nextCategoryButton.disabled = categories.scrollLeft >= maxScroll - 1;
+        };
+
+        const scrollCategories = (direction) => {
+          const firstCard = categories.querySelector('.tarjeta-categoria');
+          const gap = parseFloat(getComputedStyle(categories).gap) || 0;
+          const distance = firstCard ? firstCard.getBoundingClientRect().width + gap : categories.clientWidth;
+
+          categories.scrollBy({
+            left: direction * distance,
+            behavior: 'auto'
+          });
+          updateCategoryButtons();
+        };
+
+        previousCategoryButton.addEventListener('click', () => scrollCategories(-1));
+        nextCategoryButton.addEventListener('click', () => scrollCategories(1));
+        categories.addEventListener('scroll', updateCategoryButtons, { passive: true });
+        window.addEventListener('resize', updateCategoryButtons);
+        new ResizeObserver(updateCategoryButtons).observe(categories);
+        updateCategoryButtons();
+      }
+
       const modal = document.getElementById('modal-acceso');
       const cerrar = document.getElementById('cerrar-modal');
       const tabLogin = document.getElementById('tab-login');
